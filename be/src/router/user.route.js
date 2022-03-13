@@ -1,17 +1,12 @@
 const Router = require('koa-router');
 
-const { userValidator, cryptPassword } = require('../middleware/user.middleware');
+const { userValidator, cryptPassword, verifyUser } = require('../middleware/user.middleware');
+const { register } = require('../controller/user.controller')
 
 const router = new Router({ prefix: '/users' });
 
 // 注册接口
-router.post('/register', userValidator, cryptPassword, (ctx) => {
-  ctx.body = {
-    code: 201,
-    result: '注册成功啦',
-    message: '出错了'
-  }
-});
+router.post('/register', userValidator, verifyUser, cryptPassword, register);
 
 // 登录接口
 //router.post('/login', userValidator, verifyLogin, login);

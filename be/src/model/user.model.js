@@ -23,15 +23,15 @@ const userSchema = new Schema({
     default: false
   },
   pushBlogs: {
-    type: Array,
+    type: Schema.Types.ObjectId,
     ref: "blog"
   },
   likeBlogs: {
-    type: Array,
+    type: Schema.Types.ObjectId,
     ref: "blog"
   },
   commentBlogs: {
-    type: Array,
+    type: Schema.Types.ObjectId,
     ref: "blog"
   }
 })

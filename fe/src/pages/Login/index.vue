@@ -2,12 +2,19 @@
   <div id="login-wrapper">
     <div id="login-box">
       <div id="account">
-        <span>账号：</span>
-        <input type="text" v-model="account">
+        <div class="input-box">
+          <span>账号：</span>
+          <div class="inputer">
+            <input type="text" v-model="account">
+            <span class="tip" v-show="isShowAT">11位电话号码格式！</span>
+          </div>
+        </div>
       </div>
       <div id="password">
-        <span>密码：</span>
-        <input type="text" v-model="password">
+        <div class="input-box">
+          <span>密码：</span>
+          <input type="password" v-model="password">
+        </div>
       </div>
       <Buttons content = '登录' @click="getLogin()"/>
     </div>
@@ -21,13 +28,14 @@ export default {
     return {
       account:'',
       password:'',
+      isShowAT:false
     }
   },
   methods:{
   getLogin() {
     const account = this.account;
     const password = this.password;
-    if(account.trim()&&password.trim()) {
+    if(!this.isShowAT&&password.trim()) {
         this.$store.dispatch('userLogin',
         {
         account,
@@ -37,11 +45,22 @@ export default {
       alert('输入为空！');
     }
   }
+  },
+  watch:{
+    account: {
+    handler(newValue,oldValue) {
+      if(!(/^1[0-9]{10}$/.test(newValue))){
+        this.isShowAT=true;
+      }else {
+        this.isShowAT = false;
+      }
+    }
+  },
   }
 }
 </script>
 
-<style>
+<style scoped>
   #login-wrapper {
     display: flex;
     justify-content: center;
@@ -64,18 +83,33 @@ export default {
 
   input {
     width: 200px;
-    height: 30px;
+    height: 2rem;
     border: 1px solid #00dffc;
     outline: none;
     background-color: #202022;
     color: white;
   }
 
-  #account {
-    margin: 1rem auto;
+  .input-box {
+    padding-top: 0.5rem;
   }
 
-  #password {
-    margin-bottom: 1rem;
+  #passwordVerify {
+    align-self: flex-start;
+    margin-left: 55px;
+  }
+
+  .inputer {
+    position: relative;
+    display: inline-block;
+    height: 3.5rem;
+  }
+
+  .tip {
+    display: block;
+    position: absolute;
+    height: 1rem;
+    width: 100%;
+    bottom: 0;
   }
 </style>

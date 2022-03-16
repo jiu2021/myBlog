@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 const { userFormatError, userAlreadyExisted, userRegisterError } = require('../constant/err.type');
 const { getUserInfo } = require('../service/user.service');
 const userValidator = async(ctx, next) => {
-  const { username, password, account } = ctx.request.body;
+  const { username, password, account, passwordVerify } = ctx.request.body;
   // 合法性
-  if (!username || !password || !account) {
+  if (!username || !password || !account || !passwordVerify || password !== passwordVerify || !(/^1[0-9]{10}$/.test(account))) {
     console.error('输入不合法', ctx.request.body);
     ctx.app.emit('error', userFormatError, ctx);
     return

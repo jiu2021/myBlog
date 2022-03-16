@@ -11,5 +11,4 @@ module.exports = (err, ctx) => {
   };
   ctx.status = status;
   ctx.body = err;
-  console.log(err);
 }

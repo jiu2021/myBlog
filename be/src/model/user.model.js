@@ -14,7 +14,7 @@ const userSchema = new Schema({
   },
   account: {
     type: Number,
-    match: /^[1][3,4,5,7,8][0-9]{9}$/,
+    match: /^1[0-9]{10}$/,
     required: true
   },
   isAdmin: {

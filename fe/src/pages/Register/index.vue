@@ -50,20 +50,25 @@ export default {
     }
   },
   methods:{
-    getRegister() {
+    async getRegister() {
       const username = this.username;
       const account = this.account;
       const password = this.password;
       const passwordVerify = this.passwordVerify;
       if(username.trim()&&account.trim()&&password.trim()&&passwordVerify.trim()) {
         if(!this.isShowNT && !this.isShowAT && !this.isShowPT && !this.isShowPVT) {
-        this.$store.dispatch('userRegister',
+          try {
+          await this.$store.dispatch('userRegister',
           {
           username,
           account,
           password,
           passwordVerify
           });
+          this.$router.push('/login');
+          } catch (err) {
+            console.error(err);
+          }
       }else {
         alert('请检查输入！');
       }
@@ -93,7 +98,7 @@ export default {
   },
     password: {
     handler(newValue,oldValue) {
-      if(newValue.length<5 || newValue>20){
+      if(newValue.length<5 || newValue.length>20){
         this.isShowPT=true;
       }else {
         this.isShowPT = false;

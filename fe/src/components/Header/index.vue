@@ -1,9 +1,13 @@
 <template>
   <div id="header">
     <div id="header-content">
-      <div id="users"> 
-        <span id="login" @click="goLogin()">登录</span>
-        <span id="register" @click="goRegister()">注册</span>
+      <div class="users" v-if="!userName"> 
+        <span class="login" @click="goLogin()">登录</span>
+        <span class="register" @click="goRegister()">注册</span>
+      </div>
+      <div class="users" v-else> 
+        <span class="login">{{userName}}</span>
+        <span class="register" @click="getLogout()">退出登录</span>
       </div>
       <div id="header-title">jiu。'Blog</div>
       <div id="inputer">
@@ -35,6 +39,16 @@ export default {
     },
     goRegister() {
       this.$router.push('/register');
+    },
+    async getLogout() {
+      if(confirm('是否退出登录？')){
+        await this.$store.dispatch('userLogout');
+      }
+    }
+  },
+  computed:{
+    userName() {
+        return this.$store.state.user.userInfo.username;
     }
   }
 }
@@ -69,18 +83,18 @@ export default {
   line-height: 48px;
 }
 
-#users {
+.users {
   font-size: 0.8rem;
   line-height: 48px;
   color: #00dffc;
 }
 
-#login {
+.login {
   border-right: 1px solid #00dffc;
   padding-right: 0.5rem;
 }
 
-#register {
+.register {
   padding-left: 0.5rem;
 }
 

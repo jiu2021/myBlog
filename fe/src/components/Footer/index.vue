@@ -3,9 +3,9 @@
     <a href="#" class="link">
       <img src="http://www.xiong35.cn/assets/github.b35d1929.svg" /> 本博客GitHub地址
     </a>
-    <a href="#" class="link">鄂ICP备20007921号-1</a>
+    <a href="#" class="link">鄂ICP备xxxxxxx号-1</a>
     <a href="#" class="link">
-      <img src="http://www.xiong35.cn/assets/%E5%85%AC%E5%AE%89.a20583c8.png" /> 鄂公网安备 42011102003909号
+      <img src="http://www.xiong35.cn/assets/%E5%85%AC%E5%AE%89.a20583c8.png" /> 鄂公网安备 xxxxxxxxx号
     </a>
     <div>请使用 Edge 或 Chrome 访问以获得最佳体验</div>
   </div>

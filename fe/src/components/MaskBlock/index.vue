@@ -1,6 +1,6 @@
 <template>
   <div id="mask-wrapper" ref="maskWrapper">
-    <div v-for="n in 100" :key="n" class="mask-block" ref="eachMaskBlock"></div>
+    <div v-for="n in 150" :key="n" class="mask-block" ref="eachMaskBlock"></div>
   </div>
 </template>
 
@@ -23,11 +23,11 @@ export default {
   
       setTimeout(() => {
         for (let i = 0; i < maskBlocks.length; i++) {
-          let topValue = Math.round(Math.random() * 100) - 5;
-          let leftValue = Math.round(Math.random() * 100) - 5;
+          var topValue = Math.round(Math.random() * 100 - 5);
+          var leftValue = Math.round(Math.random() * 100 - 5);
           maskBlocks[i].style.top = topValue + '%';
           maskBlocks[i].style.left = leftValue + '%';
-          var degValue = Math.round(Math.random() * 360);
+          let degValue = Math.round(Math.random() * 360);
           maskBlocks[i].style.setProperty("--rotate-deg", degValue + 'deg');
         }
       }, 0);

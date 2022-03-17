@@ -13,7 +13,7 @@
       <div id="password">
         <div class="input-box">
           <span>密码：</span>
-          <input type="password" v-model="password">
+          <input type="password" v-model="password" @keyup.enter="getLogin()">
         </div>
       </div>
       <Buttons content = '登录' @click="getLogin()"/>
@@ -32,15 +32,16 @@ export default {
     }
   },
   methods:{
-  getLogin() {
+  async getLogin() {
     const account = this.account;
     const password = this.password;
     if(!this.isShowAT&&password.trim()) {
-        this.$store.dispatch('userLogin',
-        {
-        account,
-        password,
-        });
+      try {
+        await this.$store.dispatch('userLogin',{account,password});
+        this.$router.push('/home');
+      } catch (err) {
+        console.error(err);
+      }
     }else {
       alert('输入为空！');
     }

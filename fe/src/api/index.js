@@ -9,8 +9,14 @@ export const reqUserRegister = (data) => request({
 })
 
 //登录
-export const reqUserLogin = (data) => reques({
+export const reqUserLogin = (data) => request({
   url: `/users/login`,
   data,
   method: 'post'
+})
+
+//获取用户信息
+export const reqUserInfo = () => request({
+  url: `/users/getUserInfo`,
+  method: 'get'
 })

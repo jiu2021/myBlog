@@ -16,9 +16,9 @@ const request = axios.create({
 request.interceptors.request.use((config) => {
   //config:配置对象，其中有一个重要属性，headers请求头
   //携带token给服务器
-  /*if (store.state.user.token) {
+  if (store.state.user.token) {
     config.headers.token = store.state.user.token;
-  }*/
+  }
   return config;
 })
 

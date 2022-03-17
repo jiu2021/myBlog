@@ -10,7 +10,7 @@ import BlogView from '@/pages/BlogView'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 //引入store
-//import store from '@/store'
+import store from '@/store'
 
 //先把VueRouter原型对象的push先保存一份
 let originPush = VueRouter.prototype.push;
@@ -69,7 +69,7 @@ let router = new VueRouter({
 
 
 //全局前置守卫
-/*router.beforeEach(async(to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   let token = store.state.user.token;
   let name = store.state.user.userInfo.name;
   if (token) {
@@ -99,7 +99,7 @@ let router = new VueRouter({
     //console.log('未登录');
     next();
   }
-});*/
+});
 
 
 export default router;

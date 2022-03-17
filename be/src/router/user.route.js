@@ -1,15 +1,19 @@
 const Router = require('koa-router');
 
-const { userValidator, cryptPassword, verifyUser } = require('../middleware/user.middleware');
-const { register } = require('../controller/user.controller')
+const { registerValidator, cryptPassword, verifyUser, loginValidator, verifyLogin } = require('../middleware/user.middleware');
+const { register, login } = require('../controller/user.controller');
+const { auth } = require('../middleware/auth.middleware');
+const { userInfo } = require('../controller/user.controller');
 
 const router = new Router({ prefix: '/users' });
 
 // 注册接口
-router.post('/register', userValidator, verifyUser, cryptPassword, register);
+router.post('/register', registerValidator, verifyUser, cryptPassword, register);
 
 // 登录接口
-//router.post('/login', userValidator, verifyLogin, login);
+router.post('/login', loginValidator, verifyLogin, login);
 
+// 用户信息接口
+router.get('/getUserInfo', auth, userInfo);
 
 module.exports = router;

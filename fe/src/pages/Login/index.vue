@@ -13,10 +13,10 @@
       <div id="password">
         <div class="input-box">
           <span>密码：</span>
-          <input type="password" v-model="password" @keyup.enter="getLogin()">
+          <input type="password" v-model="password" @keyup.enter.prevent="getLogin()">
         </div>
       </div>
-      <Buttons content = '登录' @click="getLogin()"/>
+      <Buttons content = '登录' @click.prevent.native="getLogin()"/>
     </div>
   </div>
 </template>

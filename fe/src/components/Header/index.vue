@@ -12,9 +12,9 @@
       <div id="header-title">jiu。'Blog</div>
       <div id="inputer">
         <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
-        <div id="search"></div>
+        <img :src="searchSVG" id="search">
       </div>
-      <img src="http://www.xiong35.cn/assets/menu.5cf60f26.svg" id="show-nav"/>
+      <img :src="menuSVG" id="show-nav"/>
     </div>
     <div id="nav-bar">
       <h2>站内导航</h2>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import menuSVG from '@/assets/images/menu.svg'
+import searchSVG from '@/assets/images/search.svg'
 export default {
   name:"Header",
   data() {
@@ -49,6 +51,12 @@ export default {
   computed:{
     userName() {
         return this.$store.state.user.userInfo.username;
+    },
+    menuSVG() {
+      return menuSVG;
+    },
+    searchSVG() {
+      return searchSVG;
     }
   }
 }
@@ -115,10 +123,8 @@ export default {
 }
 
 #search {
-  width: 2rem;
+  width: 1.5rem;
   height: 100%;
-  background: url('http://www.xiong35.cn/assets/search.3d279bf0.svg') no-repeat center;
-  background-size: 1.5rem;
 }
 
 #show-nav {

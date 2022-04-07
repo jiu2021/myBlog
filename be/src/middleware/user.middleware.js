@@ -24,8 +24,8 @@ const loginValidator = async(ctx, next) => {
     }
     await next();
   }
-  //账户查询
-const verifyUser = async(ctx, next) => {
+  //账户核对
+const verifyRegister = async(ctx, next) => {
     const { account } = ctx.request.body;
     // 合理性
     try {
@@ -80,7 +80,7 @@ const verifyLogin = async(ctx, next) => {
 module.exports = {
   registerValidator,
   cryptPassword,
-  verifyUser,
+  verifyRegister,
   loginValidator,
   verifyLogin,
 }

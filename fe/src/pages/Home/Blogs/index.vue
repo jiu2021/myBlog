@@ -4,7 +4,7 @@
       <div class="blog-title">
       <div class="title-content" ref="titleContent">标题</div>
       <div class="view-nums">
-        <img src="http://www.xiong35.cn/assets/hot.35135986.svg" class="view" />
+        <img :src="hotSVG" class="view" />
         <span class="nums">110</span>
       </div>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import hotSVG from '@/assets/images/hot.svg'
 export default {
   name:"Blogs",
   mounted() {
@@ -56,6 +57,11 @@ export default {
     showMask(){
      this.$bus.$emit('showMask');
    }
+  },
+  computed:{
+    hotSVG() {
+      return hotSVG;
+    }
   }
 }
 </script>

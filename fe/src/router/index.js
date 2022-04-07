@@ -32,8 +32,8 @@ VueRouter.prototype.replace = function(location, resolve, reject) {
   }
 }
 
+//配置路由
 let router = new VueRouter({
-  //配置路由
   routes: [{
       path: "/home",
       component: Home,
@@ -66,7 +66,6 @@ let router = new VueRouter({
     }
   ]
 });
-
 
 //全局前置守卫
 router.beforeEach(async(to, from, next) => {

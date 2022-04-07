@@ -18,7 +18,6 @@ app.use(KoaBody({
     //不建议使用相对路径
     uploadDir: path.join(__dirname, '../upload'),
     keepExtensions: true,
-
   },
   parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE']
 }));

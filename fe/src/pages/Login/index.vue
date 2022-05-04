@@ -43,7 +43,9 @@ export default {
         console.error(err);
       }
     }else {
-      alert('输入为空！');
+      let mode = 'alert';
+      let tips = '输入不能为空！';
+      this.$bus.$emit('showTipBox',{mode,tips});
     }
   }
   },

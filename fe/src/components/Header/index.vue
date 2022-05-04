@@ -43,6 +43,10 @@ export default {
       this.$router.push('/register');
     },
     async getLogout() {
+      let mode = 'confirm';
+      let tips = '是否退出登录';
+      this.$bus.$emit('showTipBox', { mode, tips });
+      console.log(this.$store.state.tip)
       if(confirm('是否退出登录？')){
         await this.$store.dispatch('userLogout');
       }
@@ -73,7 +77,7 @@ export default {
   height: 48px;
   border-bottom: 1px solid #e7e7e7;
   color: white;
-  z-index: 5;
+  /*z-index: 5;*/
   background-color: #202022;
 }
 

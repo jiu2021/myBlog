@@ -69,11 +69,15 @@ export default {
           } catch (err) {
             console.error(err);
           }
+        }else {
+          let mode = 'alert';
+        let tips = '请检查输入！';
+        this.$bus.$emit('showTipBox',{mode,tips});
+        }
       }else {
-        alert('请检查输入！');
-      }
-      }else {
-        alert('输入不能为空！');
+        let mode = 'alert';
+        let tips = '输入不能为空！';
+        this.$bus.$emit('showTipBox',{mode,tips});
       }
     },
   },

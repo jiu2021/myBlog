@@ -63,7 +63,7 @@ export default {
   outline: none;
   color: #00dffc;
   transition: 0.2s ease;
-  z-index: 1;
+  /*z-index: 1;*/
 }
 
 .bt-content {

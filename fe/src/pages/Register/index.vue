@@ -29,7 +29,7 @@
           <span class="tip" v-show="isShowPVT">密码不一致！</span>
         </div>
       </div>
-      <Buttons content = '注册' @click="getRegister()"/>
+      <Buttons content = '注册' @click.native="getRegister()"/>
     </div>
   </div>
 </template>
@@ -70,14 +70,10 @@ export default {
             console.error(err);
           }
         }else {
-          let mode = 'alert';
-        let tips = '请检查输入！';
-        this.$bus.$emit('showTipBox',{mode,tips});
+          this.$tip({tipInfo:'请检查输入！'});
         }
       }else {
-        let mode = 'alert';
-        let tips = '输入不能为空！';
-        this.$bus.$emit('showTipBox',{mode,tips});
+        this.$tip({tipInfo:'输入不能为空！'});
       }
     },
   },

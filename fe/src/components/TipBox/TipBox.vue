@@ -1,12 +1,12 @@
 <template>
-  <div class="box-wrapper">
+  <div class="box-wrapper" v-if="isShow">
     <div class="box">
       <div class="box-info">
-        {{boxData.tips}}
+        {{tipInfo}}
       </div>
       <div class="box-btn">
-        <Buttons content ='确定' @click.native="closeBox()"/>
-        <Buttons content='取消' @click.native="cancel()" v-show="boxData.mode == 'confirm'"/>
+        <Buttons content ='确定' @click.native="confirm()"/>
+        <Buttons content='取消' @click.native="cancel()" v-show="cancelBtn"/>
       </div>
     </div>
   </div>
@@ -16,15 +16,25 @@
 export default {
   name:"TipBox",
   props:['boxData'],
+  data() {
+    return {
+      isShow:true,
+      tipInfo:'',
+      cancelBtn:false,
+    }
+  },
   mounted() {
   },
   methods:{
-    closeBox() {
-      this.$bus.$emit('closeTipBox');
+    confirm() {
+      // 确定
+      this.a_confirm && this.a_confirm();
+      this.isShow = false;
     },
     cancel() {
-      console.log('取消');
-      this.$bus.$emit('closeTipBox');
+      // 取消
+      this.a_cancel && this.a_cancel();
+      this.isShow = false;
     }
   }
 }
@@ -40,6 +50,7 @@ export default {
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2;
   }
 
   .box {

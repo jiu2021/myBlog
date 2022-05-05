@@ -3,38 +3,26 @@
     <router-view></router-view>
     <MouseDIY/>
     <MaskBlock/>
-    <TipBox v-if="isShowBox" :boxData="boxData"/>
   </div>
 </template>
 
 <script>
 import MouseDIY from '@/components/MouseDIY'
 import MaskBlock from '@/components/MaskBlock'
-import TipBox from '@/components/TipBox'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      isShowBox:false,
-      boxData:{}
-    }
-  },
   components: {
-    MouseDIY,MaskBlock,TipBox
+    MouseDIY,
+    MaskBlock
   },
-  mounted() {
-    this.$bus.$on('showTipBox',(boxData)=>{
-      this.boxData = boxData;
-      this.isShowBox = true;
-    });
-
-    this.$bus.$on('closeTipBox',()=>{
-      this.isShowBox = false;
-    });
-  },
-  methods:{
-  },
+  watch:{
+    $route: {
+      handler: function(val, oldVal){
+        this.$bus.$emit('showMask');
+      }
+    }
+  }
 }
 </script>
 

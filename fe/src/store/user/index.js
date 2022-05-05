@@ -8,13 +8,10 @@ const actions = {
         alert(result.data.username + '已注册成功！');
         return 'ok';
       } else if (result.code == 400) {
-        let mode = 'alert';
-        let tips = result.message + '，请重新输入！';
-        this._vm.$bus.$emit('showTipBox', { mode, tips });
+        let tipInfo = result.message + '，请重新输入！';
+        this._vm.$tip({ tipInfo });
       } else {
-        let tips = '服务器内部出错，请稍后重试！';
-        let mode = 'alert';
-        this._vm.$bus.$emit('showTipBox', { mode, tips });
+        this._vm.$tip({ tipInfo: '服务器内部出错请稍后重试！' });
       }
     } catch (err) {
       console.log(err)
@@ -31,13 +28,10 @@ const actions = {
         localStorage.setItem('Token', result.data.token);
         context.commit('USERLOGIN', result.data);
       } else if (result.code == 400) {
-        let mode = 'alert';
-        let tips = result.message + '，请重新输入！';
-        this._vm.$bus.$emit('showTipBox', { mode, tips });
+        let tipInfo = result.message + '，请重新输入！';
+        this._vm.$tip({ tipInfo });
       } else {
-        let mode = 'alert';
-        let tips = '服务器内部出错，请稍后重试！';
-        this._vm.$bus.$emit('showTipBox', { mode, tips });
+        this._vm.$tip({ tipInfo: '服务器内部出错请稍后重试！' });
       }
     } catch (err) {
       console.log(err);

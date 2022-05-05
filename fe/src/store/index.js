@@ -7,9 +7,8 @@ Vue.use(Vuex);
 
 //引入小仓库
 import user from '@/store/user'
-import tip from '@/store/tip';
 //创建并暴露store
 export default new Vuex.Store({
   //实现Vuex仓库模块化开发
-  modules: { user, tip }
+  modules: { user }
 })

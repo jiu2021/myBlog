@@ -17,6 +17,9 @@ Vue.component(Tags.name, Tags)
   //引入仓库
 import store from '@/store'
 Vue.config.productionTip = false;
+//引入全局提示框
+import TipBox from '@/components/TipBox/index'
+Vue.prototype.$tip = TipBox;
 
 new Vue({
   //装载事件总线

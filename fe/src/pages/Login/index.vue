@@ -16,7 +16,7 @@
           <input type="password" v-model="password" @keyup.enter.prevent="getLogin()">
         </div>
       </div>
-      <Buttons content = '登录' @click.prevent.native="getLogin()"/>
+      <Buttons content = '登录' @click.native="getLogin()"/>
     </div>
   </div>
 </template>
@@ -43,9 +43,7 @@ export default {
         console.error(err);
       }
     }else {
-      let mode = 'alert';
-      let tips = '输入不能为空！';
-      this.$bus.$emit('showTipBox',{mode,tips});
+      this.$tip({tipInfo:'输入不能为空！'});
     }
   }
   },

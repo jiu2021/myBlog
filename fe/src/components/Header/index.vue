@@ -42,14 +42,18 @@ export default {
     goRegister() {
       this.$router.push('/register');
     },
-    async getLogout() {
-      let mode = 'confirm';
-      let tips = '是否退出登录';
-      this.$bus.$emit('showTipBox', { mode, tips });
-      console.log(this.$store.state.tip)
-      if(confirm('是否退出登录？')){
-        await this.$store.dispatch('userLogout');
-      }
+    getLogout() {
+      let that = this;
+      this.$tip({
+        tipInfo:'是否退出登录？',
+        cancelBtn:true,
+        async confirm() {
+          await that.$store.dispatch('userLogout');
+        },
+        cancel() {
+          console.log('取消')
+        }
+      });
     }
   },
   computed:{

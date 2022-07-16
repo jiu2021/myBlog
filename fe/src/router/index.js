@@ -6,9 +6,11 @@ Vue.use(VueRouter);
 //引入路由组件
 import Home from '@/pages/Home'
 import About from '@/pages/About'
-import BlogView from '@/pages/BlogView'
+import BlogView from '@/components/BlogView'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
+import BlogList from '@/components/Blog'
+import BlogEdit from '@/components/BlogEdit'
 //引入store
 import store from '@/store'
 
@@ -36,28 +38,43 @@ VueRouter.prototype.replace = function(location, resolve, reject) {
 let router = new VueRouter({
   routes: [{
       path: "/home",
+      name: "home",
       component: Home,
-      //meta: { show: true }
+      children: [{
+            path: "",
+            name: "bloglist",
+            component: BlogList
+          },
+          {
+            path: "/blogview/:id?",
+            name: "blogview",
+            component: BlogView,
+          }
+        ]
+        //meta: { show: true }
     },
     {
       path: "/about",
+      name: "about",
       component: About,
       //meta: { show: false }
     },
     {
-      path: "/blogView",
-      component: BlogView,
-      //meta: { show: false }
-    },
-    {
       path: "/login",
+      name: "login",
       component: Login,
       //meta: { show: false }
     },
     {
       path: "/register",
+      name: "register",
       component: Register,
       //meta: { show: false }
+    },
+    {
+      path: "/blogedit",
+      name: "blogedit",
+      component: BlogEdit,
     },
     //重定向，初始化首页
     {

@@ -1,15 +1,12 @@
 <template>
-  <div id="home-wrapper"> 
+  <div id="home-wrapper">
     <Header/>
     <div id="main">
       <div id="menu-container">
         <Nav/>
       </div>
       <div id="blog-container">
-        <div id="top-title">文章列表</div>
-        <Blogs/>
-        <Blogs/>
-        <Blogs/>
+        <router-view></router-view>
       </div>
       <div id="tag-container">
         <Tags/>
@@ -20,11 +17,16 @@
 </template>
 
 <script>
-import Blogs from '@/pages/Home/Blogs'
 export default {
-name:"Home",
+  name:"Home",
   components: {
-    Blogs
+  },
+  data() {
+    return {
+      blogview:true,
+    }
+  },
+  methods:{
   }
 }
 </script>
@@ -34,15 +36,6 @@ name:"Home",
 
 #home-wrapper {
   background-color: #202022;
-  height: 100%;
-}
-
-#top-title {
-  height: 4rem;
-  line-height: 4rem;
-  font-size: 1.5rem;
-  font-weight: 1000;
-  color: white;
 }
 
 #main {
@@ -58,6 +51,7 @@ name:"Home",
 
 #blog-container {
   flex: 1 1;
+  z-index: 0;
 }
 
 #tag-container {

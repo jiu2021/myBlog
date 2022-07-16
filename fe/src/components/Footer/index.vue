@@ -32,6 +32,7 @@ export default {
   margin: 70px auto;
   font-size: 14px;
   color: #b1b1b1;
+  padding-bottom: 2rem;
 }
 
 #footer a {

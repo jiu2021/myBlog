@@ -1,20 +1,22 @@
 <template>
   <div id="header">
     <div id="header-content">
-      <div class="users" v-if="!userName"> 
-        <span class="login" @click="goLogin()">登录</span>
-        <span class="register" @click="goRegister()">注册</span>
+      <div class="header-left">
+        <div id="header-title">jiu。'Blog</div>
+        <div class="users" v-if="!userName"> 
+          <span class="login" @click="goLogin()">登录</span>
+          <span class="register" @click="goRegister()">注册</span>
+        </div>
+        <div class="users" v-else> 
+          <span class="login">{{userName}}</span>
+          <span class="register" @click="getLogout()">退出登录</span>
+        </div>
       </div>
-      <div class="users" v-else> 
-        <span class="login">{{userName}}</span>
-        <span class="register" @click="getLogout()">退出登录</span>
-      </div>
-      <div id="header-title">jiu。'Blog</div>
       <div id="inputer">
         <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
-        <img :src="searchSVG" id="search">
+        <img src="@/assets/svg/search.svg" id="search">
       </div>
-      <img :src="menuSVG" id="show-nav"/>
+      <img src="@/assets/svg/menu.svg" id="show-nav"/>
     </div>
     <div id="nav-bar">
       <h2>站内导航</h2>
@@ -26,8 +28,6 @@
 </template>
 
 <script>
-import menuSVG from '@/assets/images/menu.svg'
-import searchSVG from '@/assets/images/search.svg'
 export default {
   name:"Header",
   data() {
@@ -60,12 +60,6 @@ export default {
     userName() {
         return this.$store.state.user.userInfo.username;
     },
-    menuSVG() {
-      return menuSVG;
-    },
-    searchSVG() {
-      return searchSVG;
-    }
   }
 }
 </script>
@@ -81,22 +75,25 @@ export default {
   height: 48px;
   border-bottom: 1px solid #e7e7e7;
   color: white;
-  /*z-index: 5;*/
+  z-index: 5;
   background-color: #202022;
 }
-
+.header-left {
+  display: flex;
+  align-items: center;
+}
 #header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1100px;
   height: 100%;
-  margin: 0 auto;
+  margin:0 1rem;
 }
 
 #header-title {
   font-size: 1.5rem;
   line-height: 48px;
+  margin-right: 1rem;
 }
 
 .users {

@@ -2,19 +2,19 @@
   <div class="blogs" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
     <div class="blog-content">
       <div class="blog-title">
-      <div class="title-content" ref="titleContent">标题</div>
-      <div class="view-nums">
-        <img :src="hotSVG" class="view" />
-        <span class="nums">110</span>
+        <div class="title-content" ref="titleContent">标题</div>
+        <div class="view-nums">
+          <img src="@/assets/svg/hot.svg" class="view" />
+          <span class="nums">110</span>
+        </div>
       </div>
-    </div>
-    <div class="blog-outline">梗概</div>
-    <div class="blog-information">
-      <div class="tag-content">
-        <Tags/>
+      <div class="blog-outline">梗概</div>
+      <div class="blog-information">
+        <div class="tag-content">
+          <Tags/>
+        </div>
+        <div class="date-content">日期</div>
       </div>
-      <div class="date-content">日期</div>
-    </div>
     </div>
     <div class="blog-decoration">
       <div class="blog-decoration-a" ref="blogDecoA"></div>
@@ -25,9 +25,8 @@
 </template>
 
 <script>
-import hotSVG from '@/assets/images/hot.svg'
 export default {
-  name:"Blogs",
+  name:"Blog",
   mounted() {
     this.borderBlink();
     this.titleBlink();
@@ -59,9 +58,6 @@ export default {
    }
   },
   computed:{
-    hotSVG() {
-      return hotSVG;
-    }
   }
 }
 </script>

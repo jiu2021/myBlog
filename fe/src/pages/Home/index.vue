@@ -1,6 +1,6 @@
 <template>
   <div id="home-wrapper">
-    <Header/>
+    <Header />
     <div id="main">
       <div id="menu-container">
         <Nav/>
@@ -12,7 +12,7 @@
         <Tags/>
       </div>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 

@@ -6,7 +6,8 @@ const { JWT_SECRET } = require('../config/config.default');
 const { tokenExpireError, invalidToken, hasNotAdminPermission } = require('../constant/err.type');
 
 const auth = async(ctx, next) => {
-  const { token = '' } = ctx.request.header;
+  const { authorization = '' } = ctx.request.header;
+  const token = authorization.replace('Bearer ', '');
   try {
     const user = jwt.verify(token, JWT_SECRET);
     ctx.state.user = user;
@@ -29,8 +30,8 @@ const auth = async(ctx, next) => {
 }
 
 const hadAdminPermission = async(ctx, next) => {
-  const { is_admin } = ctx.state.user._doc;
-  if (!is_admin) {
+  const { isAdmin } = ctx.state.user._doc;
+  if (!isAdmin) {
     console.error('该用户没有管理员权限', ctx.state.user._doc);
     return ctx.app.emit('error', hasNotAdminPermission, ctx);
   }

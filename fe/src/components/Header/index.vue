@@ -1,21 +1,22 @@
 <template>
   <div id="header">
     <div id="header-content">
-      <div class="header-left">
-        <div id="header-title">jiu。'Blog</div>
+      <div id="header-title">jiu。'Blog</div>
+      <div class="header-right">
+        <div id="inputer">
+          <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
+          <img src="@/assets/svg/search.svg" id="search">
+        </div>
         <div class="users" v-if="!userName"> 
-          <span class="login" @click="goLogin()">登录</span>
+          <span class="login" @click="goLogin()">管理员登录</span>
           <span class="register" @click="goRegister()">注册</span>
         </div>
         <div class="users" v-else> 
-          <span class="login">{{userName}}</span>
+          <span class="login">{{userName}}，已登录</span>
           <span class="register" @click="getLogout()">退出登录</span>
         </div>
       </div>
-      <div id="inputer">
-        <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
-        <img src="@/assets/svg/search.svg" id="search">
-      </div>
+
       <img src="@/assets/svg/menu.svg" id="show-nav"/>
     </div>
     <div id="nav-bar">
@@ -78,7 +79,7 @@ export default {
   z-index: 5;
   background-color: #202022;
 }
-.header-left {
+.header-right {
   display: flex;
   align-items: center;
 }
@@ -87,7 +88,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  margin:0 1rem;
+  margin-left: 10vw;
 }
 
 #header-title {
@@ -98,16 +99,15 @@ export default {
 
 .users {
   font-size: 0.8rem;
-  line-height: 48px;
   color: #00dffc;
 }
 
 .login {
-  border-right: 1px solid #00dffc;
-  padding-right: 0.5rem;
+  margin:0 2rem 0 10vw;
 }
 
 .register {
+  display: none;
   padding-left: 0.5rem;
 }
 

@@ -21,18 +21,6 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
-  },
-  pushBlogs: {
-    type: Schema.Types.ObjectId,
-    ref: "blog"
-  },
-  likeBlogs: {
-    type: Schema.Types.ObjectId,
-    ref: "blog"
-  },
-  commentBlogs: {
-    type: Schema.Types.ObjectId,
-    ref: "blog"
   }
 })
 

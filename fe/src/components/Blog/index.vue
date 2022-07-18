@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style>
-
   #top-title {
     height: 4rem;
     line-height: 4rem;

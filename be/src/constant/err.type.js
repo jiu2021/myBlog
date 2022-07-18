@@ -36,12 +36,22 @@ module.exports = {
   },
   invalidToken: {
     code: '10101',
-    message: '重新登陆',
+    message: 'token无效',
     result: ''
   },
   hasNotAdminPermission: {
     code: '10102',
     message: '无管理员权限',
+    result: ''
+  },
+  getBlogsListError: {
+    code: '10201',
+    message: '获取博客列表失败',
+    result: ''
+  },
+  addBlogError: {
+    code: '10202',
+    message: '创建博客失败',
     result: ''
   }
 }

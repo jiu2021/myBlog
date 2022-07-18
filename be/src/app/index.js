@@ -6,6 +6,7 @@ const KoaStatic = require('koa-static');
 const parameter = require('koa-parameter');
 
 const userRouter = require('../router/user.route');
+const blogRouter = require('../router/blog.route');
 
 const errHandler = require('./errHandler');
 
@@ -28,6 +29,7 @@ app.use(parameter(app));
 
 // 处理路由
 app.use(userRouter.routes());
+app.use(blogRouter.routes());
 
 //统一错误处理
 app.on('error', errHandler);

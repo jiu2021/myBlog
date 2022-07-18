@@ -33,7 +33,7 @@ export default {
   .md-wrapper /deep/ .v-show-content
   {
     background-color: var(--bg2)!important;
-    color: var(--primary)!important;
+    color: var(--font-color)!important;
   }
   .md-wrapper /deep/ .v-note-op {
     position: fixed;
@@ -43,7 +43,7 @@ export default {
     border-radius: 0;
     border: 0;
     background-color: var(--bg2)!important;
-    color: var(--primary)!important;
+    color: var(--font-color)!important;
   }
   .md-wrapper /deep/ .markdown-body {
     width: 100%;

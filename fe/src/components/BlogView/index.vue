@@ -49,12 +49,39 @@ export default {
   },
   methods: {
     edit() {
-      this.$router.push({
-        name: "blogedit",
-        params: {
-          id:"1"
-        }
-      })
+      let user = this.$store.state.user;
+      if (user.userInfo && user.userInfo.isAdmin) {
+        this.$router.push({
+          name: "blogedit",
+          params: {
+            id: "1"
+          }
+        });
+      }
+      else {
+        this.$tip({
+          tipInfo:'对不起，您不是管理员',
+          cancelBtn:false,
+          confirm() {
+            console.log('确定');
+          },
+        });
+      }
+    },
+    remove() {
+      let user = this.$store.state.user;
+      if (user.userInfo && user.userInfo.isAdmin) {
+        console.log('删除');
+      }
+      else {
+        this.$tip({
+          tipInfo:'对不起，您不是管理员',
+          cancelBtn:false,
+          confirm() {
+            console.log('确定');
+          },
+        });
+      }
     }
   },
   computed: {

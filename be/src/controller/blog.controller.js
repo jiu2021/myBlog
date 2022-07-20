@@ -2,11 +2,11 @@ const { context } = require("../app");
 const app = require("../app");
 const {
   getBlogsListError,
-  addBlogError
+  addBlogError,
+  blogUpdateError
 } = require('../constant/err.type');
-const { findBlogs, createBlog } = require('../service/blog.service');
-const { findTag, createTag, updateTag } = require('../service/tag.service');
-const tools = require('../tools');
+const { findBlogs, createBlog, updateBlog } = require('../service/blog.service');
+const { timestampToTime, tagsHandle } = require('../tools');
 
 class Cartcontroller {
   async findAll(ctx) {
@@ -22,7 +22,8 @@ class Cartcontroller {
         result: res,
       }
     } catch (err) {
-      console.error('获取博客列表失败', err);
+      console.error(err);
+      getBlogsListError.result = err;
       return ctx.app.emit('error', getBlogsListError, ctx);
     }
   }
@@ -38,30 +39,21 @@ class Cartcontroller {
       }
     };
     let dateNum = new Date().getTime();
-    const date = tools.timestampToTime(dateNum);
+    const date = timestampToTime(dateNum);
     const newBlog = { title, content, abstract, tags, date };
     // 访问数据库
     try {
       const res = await createBlog(newBlog);
-      const blog_id = res._id;
       // 处理标签问题
-      tags.forEach(async tag => {
-        const res = await findTag(tag);
-        // 如果没有tag则新建，有则更新tag数量
-        if (res.length == 0) {
-          await createTag({ name: tag, blog_ids: [blog_id] });
-        } else {
-          const tag_id = res[0]._id;
-          await updateTag({ tag_id, blog_id });
-        }
-      });
+      tagsHandle(res._id, tags, true);
       ctx.body = {
         code: 0,
         message: '创建博客成功',
-        result: blog_id
+        result: res._id
       }
     } catch (err) {
       console.error(err);
+      addBlogError.result = err;
       return ctx.app.emit('error', addBlogError, ctx);
     };
   }
@@ -70,27 +62,24 @@ class Cartcontroller {
   /*async update(ctx) {
     // 解析参数
     const { id } = ctx.request.params;
-    const { number, selected } = ctx.request.body;
-
-    if (number === undefined && selected === undefined) {
-      cartFormatError.message = 'number和selected不能同时为空';
-      return ctx.app.emit('error', cartFormatError, ctx);
-    }
+    const { title, content, abstract, tags } = ctx.request.body;
     try {
-      const res = await updateCarts({ id, number, selected });
+      // 处理标签问题
+      tagsHandle(id, tags, false);
+      const res = await updateBlog({ id, title, content, abstract, tags });
       ctx.body = {
         code: 0,
-        message: '更新购物车成功',
+        message: '修改博客成功',
         result: res
       };
     } catch (err) {
       console.error(err);
-      cartUpdateError.result = err;
-      return ctx.app.emit('error', cartUpdateError, ctx);
+      blogUpdateError.result = err;
+      return ctx.app.emit('error', blogUpdateError, ctx);
     }
   }
 
-  async remove(ctx) {
+  /*async remove(ctx) {
     const { id } = ctx.request.body;
     try {
       const res = await removeCarts(id);

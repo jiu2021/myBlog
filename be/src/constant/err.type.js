@@ -53,5 +53,10 @@ module.exports = {
     code: '10202',
     message: '创建博客失败',
     result: ''
+  },
+  blogUpdateError: {
+    code: '10203',
+    message: '修改博客失败',
+    result: ''
   }
 }

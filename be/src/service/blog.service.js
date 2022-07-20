@@ -6,7 +6,6 @@ class BlogService {
     // 设置分页查找参数
     const start = (pageNum - 1) * pageSize;
     const res = await Blog.find({ deleted: false }).skip(start).limit(pageSize);
-
     return {
       pageNum,
       pageSize,
@@ -16,25 +15,25 @@ class BlogService {
   }
 
   async createBlog(data) {
-    console.log(data);
     return await Blog.create(data);
   }
 
-  /*async updateCarts(params) {
-    const { id, number, selected } = params;
-
-    const res = await Cart.findById(id);
-    if (!res) {
-      return '未找到购物车';
-    } else {
-      console.log(res);
-      number !== undefined ? (res.number = number) : '';
-      selected !== undefined ? (res.selected = selected) : '';
-      return await Cart.updateOne({ '_id': id }, res);
-    }
+  async updateBlog(data) {
+    const { id, title, content, abstract, tags } = data;
+    const res = await Blog.findById(id);
+    console.log(res);
+    res.title = title;
+    res.content = content;
+    res.abstract = abstract;
+    abstract.tags = tags;
+    return await Blog.updateOne({ '_id': id }, res);
   }
 
-  async removeCarts(id) {
+  async findBlog(id) {
+    return await Blog.findById(id);
+  }
+
+  /*async removeCarts(id) {
     return await Cart.findOneAndRemove({ '_id': id });
   }
 

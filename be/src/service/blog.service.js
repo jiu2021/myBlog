@@ -25,7 +25,7 @@ class BlogService {
     res.title = title;
     res.content = content;
     res.abstract = abstract;
-    abstract.tags = tags;
+    res.tags = tags;
     return await Blog.updateOne({ '_id': id }, res);
   }
 
@@ -33,17 +33,15 @@ class BlogService {
     return await Blog.findById(id);
   }
 
-  /*async removeCarts(id) {
-    return await Cart.findOneAndRemove({ '_id': id });
+  async removeBlog(id) {
+    // @ts-ignore
+    const res = await Blog.deleteById({ '_id': id });
+    if (res == null) {
+      throw Error('该博客不存在');
+      return;
+    }
+    return res;
   }
-
-  async selectAllCarts(user_id) {
-    return await Cart.updateMany({ user_id }, { "selected": true });
-  }
-
-  async selectNoCarts(user_id) {
-    return await Cart.updateMany({ user_id }, { "selected": false });
-  }*/
 }
 
 module.exports = new BlogService();

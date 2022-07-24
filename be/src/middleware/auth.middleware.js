@@ -39,8 +39,6 @@ const hadAdminPermission = async(ctx, next) => {
   await next();
 }
 
-
-
 module.exports = {
   auth,
   hadAdminPermission

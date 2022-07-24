@@ -1,7 +1,7 @@
 module.exports = {
   userFormatError: {
     code: '10001',
-    message: '用户名或密码为空',
+    message: '请检查输入',
     result: '',
   },
   userAlreadyExisted: {
@@ -57,6 +57,16 @@ module.exports = {
   blogUpdateError: {
     code: '10203',
     message: '修改博客失败',
+    result: ''
+  },
+  removeBlogError: {
+    code: '10204',
+    message: '删除博客失败',
+    result: ''
+  },
+  getTagsListError: {
+    code: '10301',
+    message: '获取所有标签失败',
     result: ''
   }
 }

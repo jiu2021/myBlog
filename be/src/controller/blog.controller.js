@@ -3,12 +3,13 @@ const app = require("../app");
 const {
   getBlogsListError,
   addBlogError,
-  blogUpdateError
+  blogUpdateError,
+  removeBlogError
 } = require('../constant/err.type');
-const { findBlogs, createBlog, updateBlog } = require('../service/blog.service');
+const { findBlogs, createBlog, updateBlog, removeBlog } = require('../service/blog.service');
 const { timestampToTime, tagsHandle } = require('../tools');
 
-class Cartcontroller {
+class Blogcontroller {
   async findAll(ctx) {
     // 解析pageNum,pageSize
     const { pageSize = 10, pageNum = 1 } = ctx.request.query;
@@ -28,7 +29,7 @@ class Cartcontroller {
     }
   }
 
-  async add(ctx) {
+  async upload(ctx) {
     let { title, content, abstract = '', tags } = ctx.request.body;
     // 数据预处理
     if (abstract == '') {
@@ -38,10 +39,11 @@ class Cartcontroller {
         abstract = content;
       }
     };
+    // 标签去重
+    tags = Array.from(new Set(tags));
     let dateNum = new Date().getTime();
     const date = timestampToTime(dateNum);
     const newBlog = { title, content, abstract, tags, date };
-    // 访问数据库
     try {
       const res = await createBlog(newBlog);
       // 处理标签问题
@@ -58,11 +60,11 @@ class Cartcontroller {
     };
   }
 
-
-  /*async update(ctx) {
+  async update(ctx) {
     // 解析参数
-    const { id } = ctx.request.params;
-    const { title, content, abstract, tags } = ctx.request.body;
+    let { id, title, content, abstract, tags } = ctx.request.body;
+    // 标签去重
+    tags = Array.from(new Set(tags));
     try {
       // 处理标签问题
       tagsHandle(id, tags, false);
@@ -79,60 +81,24 @@ class Cartcontroller {
     }
   }
 
-  /*async remove(ctx) {
+  async remove(ctx) {
     const { id } = ctx.request.body;
     try {
-      const res = await removeCarts(id);
+      // 处理标签问题
+      tagsHandle(id, [], false);
+      const res = await removeBlog(id);
       ctx.body = {
         code: 0,
-        message: '移除购物车成功',
-        result: ''
+        message: '删除博客成功',
+        result: res
       }
     } catch (err) {
       console.error(err);
-      removeCartsError.result = err;
-      return ctx.app.emit('error', removeCartsError, ctx);
+      removeBlogError.result = err;
+      return ctx.app.emit('error', removeBlogError, ctx);
     }
   }
-
-  async selectAll(ctx) {
-    const user_id = ctx.state.user._doc._id;
-    try {
-      const res = await selectAllCarts(user_id);
-      if (res.matchedCount) {
-        ctx.body = {
-          code: 0,
-          message: '全选成功',
-          result: ''
-        }
-      } else {
-        return ctx.app.emit('error', selectAllError, ctx);
-      }
-    } catch (err) {
-      console.error(err);
-      return ctx.app.emit('error', selectAllError, ctx);
-    }
-  }
-
-  async selectNone(ctx) {
-    const user_id = ctx.state.user._doc._id;
-    try {
-      const res = await selectNoCarts(user_id);
-      if (res.matchedCount) {
-        ctx.body = {
-          code: 0,
-          message: '取消全选成功',
-          result: ''
-        }
-      } else {
-        return ctx.app.emit('error', selectNoneError, ctx);
-      }
-    } catch (err) {
-      console.error(err);
-      return ctx.app.emit('error', selectNoneError, ctx);
-    }
-  }*/
 }
 
 
-module.exports = new Cartcontroller();
+module.exports = new Blogcontroller();

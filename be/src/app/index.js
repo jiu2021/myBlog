@@ -1,5 +1,4 @@
 const path = require('path');
-
 const Koa = require('koa');
 const KoaBody = require('koa-body');
 const KoaStatic = require('koa-static');
@@ -7,12 +6,10 @@ const parameter = require('koa-parameter');
 
 const userRouter = require('../router/user.route');
 const blogRouter = require('../router/blog.route');
-
+const tagRouter = require('../router/tag.route');
 const errHandler = require('./errHandler');
 
-
 const app = new Koa();
-
 app.use(KoaBody({
   multipart: true,
   formidable: {
@@ -30,6 +27,7 @@ app.use(parameter(app));
 // 处理路由
 app.use(userRouter.routes());
 app.use(blogRouter.routes());
+app.use(tagRouter.routes());
 
 //统一错误处理
 app.on('error', errHandler);

@@ -64,6 +64,7 @@ export default {
   color: #00dffc;
   transition: 0.2s ease;
   z-index: 1;
+  cursor: none;
 }
 
 .bt-content {

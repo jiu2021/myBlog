@@ -4,9 +4,11 @@ const {
   getBlogsListError,
   addBlogError,
   blogUpdateError,
-  removeBlogError
+  removeBlogError,
+  visitBlogError,
+  searchBlogsError
 } = require('../constant/err.type');
-const { findBlogs, createBlog, updateBlog, removeBlog } = require('../service/blog.service');
+const { findBlogs, createBlog, updateBlog, removeBlog, visitBlog, searchBlogs } = require('../service/blog.service');
 const { timestampToTime, tagsHandle } = require('../tools');
 
 class Blogcontroller {
@@ -18,7 +20,7 @@ class Blogcontroller {
       const res = await findBlogs(pageNum, pageSize);
       // 返回结果
       ctx.body = {
-        code: 0,
+        code: 200,
         message: '获取博客列表成功',
         result: res,
       }
@@ -29,6 +31,24 @@ class Blogcontroller {
     }
   }
 
+  async findByKey(ctx) {
+    // 解析pageNum,pageSize
+    const key = ctx.request.params.key;
+    try {
+      // 调用数据处理方法
+      const res = await searchBlogs(key);
+      // 返回结果
+      ctx.body = {
+        code: 200,
+        message: '查找博客列表成功',
+        result: res,
+      }
+    } catch (err) {
+      console.error(err);
+      searchBlogsError.result = err;
+      return ctx.app.emit('error', searchBlogsError, ctx);
+    }
+  }
   async upload(ctx) {
     let { title, content, abstract = '', tags } = ctx.request.body;
     // 数据预处理
@@ -49,7 +69,7 @@ class Blogcontroller {
       // 处理标签问题
       tagsHandle(res._id, tags, true);
       ctx.body = {
-        code: 0,
+        code: 200,
         message: '创建博客成功',
         result: res._id
       }
@@ -62,7 +82,8 @@ class Blogcontroller {
 
   async update(ctx) {
     // 解析参数
-    let { id, title, content, abstract, tags } = ctx.request.body;
+    const id = ctx.request.params.id;
+    let { title, content, abstract, tags } = ctx.request.body;
     // 标签去重
     tags = Array.from(new Set(tags));
     try {
@@ -70,7 +91,7 @@ class Blogcontroller {
       tagsHandle(id, tags, false);
       const res = await updateBlog({ id, title, content, abstract, tags });
       ctx.body = {
-        code: 0,
+        code: 200,
         message: '修改博客成功',
         result: res
       };
@@ -82,13 +103,13 @@ class Blogcontroller {
   }
 
   async remove(ctx) {
-    const { id } = ctx.request.body;
+    const id = ctx.request.params.id;
     try {
       // 处理标签问题
       tagsHandle(id, [], false);
       const res = await removeBlog(id);
       ctx.body = {
-        code: 0,
+        code: 200,
         message: '删除博客成功',
         result: res
       }
@@ -96,6 +117,22 @@ class Blogcontroller {
       console.error(err);
       removeBlogError.result = err;
       return ctx.app.emit('error', removeBlogError, ctx);
+    }
+  }
+
+  async visit(ctx) {
+    const id = ctx.request.params.id;
+    try {
+      const res = await visitBlog(id);
+      ctx.body = {
+        code: 200,
+        message: '访问博客成功',
+        result: res
+      }
+    } catch (err) {
+      console.error(err);
+      visitBlogError.result = err;
+      return ctx.app.emit('error', visitBlogError, ctx);
     }
   }
 }

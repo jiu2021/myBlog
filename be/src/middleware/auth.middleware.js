@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 // @ts-ignore
 const { JWT_SECRET } = require('../config/config.default');
 
-const { tokenExpireError, invalidToken, hasNotAdminPermission } = require('../constant/err.type');
+const { tokenExpireError, invalidToken, hasNotAdminPermission, formatError } = require('../constant/err.type');
 
 const auth = async(ctx, next) => {
   const { authorization = '' } = ctx.request.header;
@@ -39,7 +39,21 @@ const hadAdminPermission = async(ctx, next) => {
   await next();
 }
 
+const validator = (rules) => {
+  return async(ctx, next) => {
+    try {
+      ctx.verifyParams(rules);
+    } catch (err) {
+      console.error('数据格式错误', err);
+      formatError.result = err;
+      return ctx.app.emit('error', formatError, ctx);
+    }
+    await next();
+  }
+}
+
 module.exports = {
   auth,
-  hadAdminPermission
+  hadAdminPermission,
+  validator
 }

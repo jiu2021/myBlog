@@ -9,10 +9,8 @@ const router = new Router({ prefix: '/users' });
 
 // 注册接口
 router.post('/register', registerValidator, verifyRegister, cryptPassword, register);
-
 // 登录接口
 router.post('/login', loginValidator, verifyLogin, login);
-
 // 用户信息接口
 router.get('/getUserInfo', auth, userInfo);
 

@@ -14,6 +14,18 @@ class BlogService {
     }
   }
 
+  async searchBlogs(key) {
+    const reg = new RegExp(key, 'i');
+    return await Blog.find({
+      $or: [ //多条件，数组
+        { title: { $regex: reg } },
+        { content: { $regex: reg } },
+        { abstract: { $regex: reg } },
+        { tags: { $regex: reg } }
+      ]
+    }, { deleted: false });
+  }
+
   async createBlog(data) {
     return await Blog.create(data);
   }
@@ -29,17 +41,31 @@ class BlogService {
     return await Blog.updateOne({ '_id': id }, res);
   }
 
-  async findBlog(id) {
+  async findBlogById(id) {
     return await Blog.findById(id);
+  }
+
+  async findBlogsByIds(idArr) {
+    return await Blog.find({ '_id': idArr, deleted: false });
   }
 
   async removeBlog(id) {
     // @ts-ignore
-    const res = await Blog.deleteById({ '_id': id });
+    const res = await Blog.deleteById({ '_id': id });;
     if (res == null) {
-      throw Error('该博客不存在');
-      return;
+      return Promise.reject('博客不存在');
     }
+    return res;
+  }
+
+  async visitBlog(id) {
+    const res = await Blog.findById(id);
+    if (res == null) {
+      return Promise.reject('博客不存在');
+    }
+    // 访问量加一
+    res.visited++;
+    await Blog.updateOne({ '_id': id }, res);
     return res;
   }
 }

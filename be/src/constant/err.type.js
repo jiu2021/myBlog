@@ -30,17 +30,17 @@ module.exports = {
     result: ''
   },
   tokenExpireError: {
-    code: '10100',
+    code: '10101',
     message: '登录过期',
     result: ''
   },
   invalidToken: {
-    code: '10101',
+    code: '10102',
     message: 'token无效',
     result: ''
   },
   hasNotAdminPermission: {
-    code: '10102',
+    code: '10103',
     message: '无管理员权限',
     result: ''
   },
@@ -64,9 +64,24 @@ module.exports = {
     message: '删除博客失败',
     result: ''
   },
+  visitBlogError: {
+    code: '10205',
+    message: '访问博客失败',
+    result: ''
+  },
   getTagsListError: {
     code: '10301',
     message: '获取所有标签失败',
     result: ''
-  }
+  },
+  getBlogsByTagError: {
+    code: '10302',
+    message: '获取标签下的博客列表失败',
+    result: ''
+  },
+  formatError: {
+    code: '10401',
+    message: '输入格式错误',
+    result: ''
+  },
 }

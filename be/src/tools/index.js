@@ -1,5 +1,5 @@
 const { findTag, createTag, addTag, subTag } = require('../service/tag.service');
-const { findBlog } = require('../service/blog.service');
+const { findBlogById } = require('../service/blog.service');
 class tools {
   // 日期格式转换
   timestampToTime(timestamp) {
@@ -14,17 +14,17 @@ class tools {
   }
 
   async tagsHandle(blog_id, tags, isNew) {
-    const resBlog = await findBlog(blog_id);
+    const resBlog = await findBlogById(blog_id);
     // 原blog的标签
     let tags_f = resBlog != null ? resBlog.tags : [];
     tags_f = isNew ? [] : tags_f;
     // 新增的tag
-    let newTag = tags.filter(value => tags_f.indexOf(value) == -1);
+    let newTags = tags.filter(value => tags_f.indexOf(value) == -1);
     // 缺失的tag
-    let subTag = tags_f.filter(value => tags.indexOf(value) == -1);
+    let subTags = tags_f.filter(value => tags.indexOf(value) == -1);
     //console.log(newTag, subTag);
-    if (newTag.length != 0) {
-      newTag.forEach(async tag => {
+    if (newTags.length != 0) {
+      newTags.forEach(async tag => {
         const res = await findTag(tag);
         // 如果没有tag则新建，有则更新tag数量
         if (res.length == 0) {
@@ -35,8 +35,8 @@ class tools {
         }
       });
     }
-    if (subTag.length != 0) {
-      subTag.forEach(async tag => {
+    if (subTags.length != 0) {
+      subTags.forEach(async tag => {
         const res = await findTag(tag);
         const tag_id = res[0]._id;
         await subTag({ tag_id, blog_id });

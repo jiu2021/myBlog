@@ -52,26 +52,26 @@ class UserController {
       }
     }
     /*async changePassword(ctx, next) {
-      //获取数据
-      const id = ctx.state.user._doc._id;
-      const user_name = ctx.state.user._doc.user_name;
-      const password = ctx.request.body.password;
-      //修改密码
-      try {
-        // @ts-ignore
-        const res = await updateById({ id, user_name, password });
-        ctx.body = {
-          code: 0,
-          message: '修改密码成功',
-          result: '',
+        //获取数据
+        const id = ctx.state.user._doc._id;
+        const user_name = ctx.state.user._doc.user_name;
+        const password = ctx.request.body.password;
+        //修改密码
+        try {
+          // @ts-ignore
+          const res = await updateById({ id, user_name, password });
+          ctx.body = {
+            code: 0,
+            message: '修改密码成功',
+            result: '',
+          }
+        } catch (err) {
+          console.error('修改密码失败', err);
+          ctx.app.emit('error', updatePasswordError, ctx);
         }
-      } catch (err) {
-        console.error('修改密码失败', err);
-        ctx.app.emit('error', updatePasswordError, ctx);
-      }
 
-      await next();
-    }*/
+        await next();
+      }*/
 }
 
 module.exports = new UserController();

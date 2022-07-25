@@ -8,12 +8,10 @@
 
 <script>
 import Markdown from "@/components/Markdown";
-import Buttons from "../Buttons/index.vue";
 export default {
   name:"BlogEdit",
   components:{
     Markdown,
-    Buttons
 },
   data() {
     return {
@@ -29,6 +27,12 @@ export default {
         scrollStyle: true
       }
     }
+  },
+  mounted() {
+    this.$bus.$emit('useMouse');
+  },
+  destroyed() {
+    this.$bus.$emit('useMouse');
   },
   methods: {
     submit() {
@@ -57,5 +61,8 @@ export default {
 }
 .btn {
   padding: 1rem 0;
+}
+.btn /deep/ .buttons {
+  cursor: default;
 }
 </style>

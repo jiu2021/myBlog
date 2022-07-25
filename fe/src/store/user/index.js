@@ -25,6 +25,8 @@ const actions = {
       //服务器下发token
       if (result.code == 200) {
         //持久化存储token
+        console.log('存储token');
+        console.log(result)
         localStorage.setItem('Token', result.data.token);
         context.commit('USERLOGIN', result.data);
       } else if (result.code == 400) {

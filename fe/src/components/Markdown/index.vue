@@ -55,4 +55,48 @@ export default {
     border-radius: 0;
     height: 100vh;
   }
+  /*标题样式*/
+  .md-wrapper /deep/ h1,
+  .md-wrapper /deep/ h2,
+  .md-wrapper /deep/ h3,
+  .md-wrapper /deep/ h4,
+  .md-wrapper /deep/ h5,
+  .md-wrapper /deep/ h6
+  {
+    border: 0;
+  }
+  .md-wrapper /deep/ h1::before {
+    content:"";
+    border-left: 5px solid #00dffc;
+    margin-right: .5rem;
+  }
+  .md-wrapper /deep/ h2::before {
+    content:"";
+    border-left: 4px solid #08ffea;
+    margin-right: .5rem;
+  }
+  .md-wrapper /deep/ h3::before {
+    content:"";
+    border-left: 3px solid #08ff6f;
+    margin-right: .5rem;
+  }
+  .md-wrapper /deep/ h4::before {
+    content:"";
+    border-left: 2px solid #e7e7e7;
+    margin-right: .5rem;
+  }
+  /*列表样式*/
+  .md-wrapper /deep/ ul {
+    list-style: disc;
+  }
+  .md-wrapper /deep/ ol {
+    list-style: decimal;
+  }
+  /*代码块演示*/
+  .md-wrapper /deep/ pre code{
+    font-size: 1rem;
+  }
+  .md-wrapper /deep/ pre .hljs {
+    background-color: #f6f8fa;
+  }
 </style>

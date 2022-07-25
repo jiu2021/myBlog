@@ -37,7 +37,7 @@ export default {
     const password = this.password;
     if(!this.isShowAT&&password.trim()) {
       try {
-        await this.$store.dispatch('userLogin',{account,password});
+        await this.$store.dispatch('userLogin', { account, password });
         this.$router.push('/home');
       } catch (err) {
         console.error(err);
@@ -80,6 +80,8 @@ export default {
     background-color:#353536;
     color: #00dffc;
     border: 1px solid #00dffc;
+    justify-content: center;
+    padding: 1rem 0;
   }
 
   input {
@@ -93,17 +95,12 @@ export default {
 
   .input-box {
     padding-top: 0.5rem;
-  }
-
-  #passwordVerify {
-    align-self: flex-start;
-    margin-left: 55px;
+    height: 3.5rem;
   }
 
   .inputer {
     position: relative;
     display: inline-block;
-    height: 3.5rem;
   }
 
   .tip {
@@ -111,6 +108,5 @@ export default {
     position: absolute;
     height: 1rem;
     width: 100%;
-    bottom: 0;
   }
 </style>

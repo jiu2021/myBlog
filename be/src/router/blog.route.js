@@ -1,17 +1,31 @@
 const Router = require('koa-router');
 
-const { auth, hadAdminPermission } = require('../middleware/auth.middleware');
-const { findAll, upload, update, remove } = require('../controller/blog.controller');
+const { auth, hadAdminPermission, validator } = require('../middleware/auth.middleware');
+const { findAll, upload, update, remove, visit, findByKey } = require('../controller/blog.controller');
 
 const router = new Router({ prefix: '/blogs' });
 
 // 添加博客接口
-router.post('/upload', auth, hadAdminPermission, upload);
+router.post('/upload', auth, hadAdminPermission, validator({
+  title: String,
+  content: String,
+  abstract: String,
+  tags: Array
+}), upload);
 // 编辑博客接口
-router.post('/update', auth, hadAdminPermission, update);
+router.put('/:id', auth, hadAdminPermission, validator({
+  title: String,
+  content: String,
+  abstract: String,
+  tags: Array
+}), update);
 // 删除（软）博客接口
-router.post('/remove', auth, hadAdminPermission, remove);
+router.delete('/:id', auth, hadAdminPermission, remove);
+// 访问博客接口
+router.get('/read/:id', visit);
 // 获取博客列表接口
-router.get('/getBlogs', findAll);
+router.get('/', findAll);
+// 关键字查找
+router.get('/search/:key', findByKey);
 
 module.exports = router;

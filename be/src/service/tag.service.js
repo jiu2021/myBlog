@@ -1,4 +1,5 @@
 const Tag = require('../model/tag.modle');
+const { findBlogsByIds } = require('../service/blog.service');
 class TagService {
   async findAllTags() {
     // 获取总数
@@ -12,6 +13,13 @@ class TagService {
 
   async findTag(tagname) {
     return await Tag.find({ name: tagname });
+  }
+
+  async findById(tagid) {
+    const res = await Tag.findById({ '_id': tagid });
+    console.log(res);
+    const blog_ids = res.blog_ids;
+    return await findBlogsByIds(blog_ids);
   }
 
   async createTag(data) {
@@ -40,31 +48,6 @@ class TagService {
       return await Tag.updateOne({ '_id': tag_id }, res);
     }
   }
-
-  /*async updateCarts(params) {
-    const { id, number, selected } = params;
-    const res = await Cart.findById(id);
-    if (!res) {
-      return '未找到购物车';
-    } else {
-      console.log(res);
-      number !== undefined ? (res.number = number) : '';
-      selected !== undefined ? (res.selected = selected) : '';
-      return await Cart.updateOne({ '_id': id }, res);
-    }
-  }
-
-  async removeCarts(id) {
-    return await Cart.findOneAndRemove({ '_id': id });
-  }
-
-  async selectAllCarts(user_id) {
-    return await Cart.updateMany({ user_id }, { "selected": true });
-  }
-
-  async selectNoCarts(user_id) {
-    return await Cart.updateMany({ user_id }, { "selected": false });
-  }*/
 }
 
 module.exports = new TagService();

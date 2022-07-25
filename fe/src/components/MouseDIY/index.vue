@@ -1,10 +1,15 @@
 <template>
-  <div id="mouse-DIY" ref = 'mouse'></div>
+  <div id="mouse-DIY" ref = 'mouse' v-show="isShow"></div>
 </template>
 
 <script>
 export default {
-name:"MouseDIY",
+  name: "MouseDIY",
+  data() {
+    return {
+      isShow:true
+  }
+},
 mounted() {
   const mouse = this.$refs.mouse;
   this.$bus.$on("mouseReverse",()=>{
@@ -12,6 +17,16 @@ mounted() {
   });
   this.$bus.$on("mouseRecover",()=>{
     mouse.classList.remove('hovering');
+  })
+  this.$bus.$on("useMouse", () => {
+    let body = document.body;
+    console.log(body.style.cursor);
+    if (body.style.cursor == 'none') {
+      body.setAttribute('style', 'cursor: auto');
+    } else {
+      body.setAttribute('style', 'cursor: none');
+    }
+    this.isShow = !this.isShow;
   })
   this.mouseMove();
 },

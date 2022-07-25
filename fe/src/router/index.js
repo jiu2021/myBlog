@@ -38,7 +38,6 @@ VueRouter.prototype.replace = function(location, resolve, reject) {
 let router = new VueRouter({
   routes: [{
       path: "/home",
-      name: "home",
       component: Home,
       children: [{
             path: "",
@@ -87,7 +86,7 @@ let router = new VueRouter({
 //全局前置守卫
 router.beforeEach(async(to, from, next) => {
   let token = store.state.user.token;
-  let name = store.state.user.userInfo.name;
+  let name = store.state.user.userInfo.username;
   if (token) {
     //用户登录了
     //console.log('有token');

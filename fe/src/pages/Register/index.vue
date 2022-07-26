@@ -1,6 +1,6 @@
 <template>
   <div id="register-wrapper">
-    <div id="register-box">
+    <form id="register-box">
       <div id="username" class="input-box">
         <span>昵称：</span>
         <div class="inputer">
@@ -30,7 +30,7 @@
         </div>
       </div>
       <Buttons content = '注册' @click.native="getRegister()"/>
-    </div>
+    </form>
   </div>
 </template>
 

@@ -53,6 +53,7 @@ const actions = {
   async getUserInfo(context) {
     let result = await reqUserInfo();
     if (result.code == 200) {
+      console.log(result);
       context.commit('GETUSERINFO', result.data);
     } else {
       return Promise.reject(new Error(result.message));
@@ -83,7 +84,6 @@ const mutations = {
 
 const state = {
   token: localStorage.getItem('Token') || '',
-  //state中数据默认初始值不能任给
   //code: '',
   userInfo: {}
 }
@@ -96,4 +96,4 @@ export default {
   mutations: mutations,
   state: state,
   getters: getters,
-}
+};

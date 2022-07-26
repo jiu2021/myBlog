@@ -1,7 +1,7 @@
 <template>
   <div class="blogedit-wrapper">
     <Header/>
-    <Markdown :config="config" :data="data" class="md"/>
+    <Markdown :config="config" :blogInfo="blogInfo" class="md"/>
     <Buttons content="确认" class="btn" @click.native="submit()" />
   </div>
 </template>
@@ -12,12 +12,14 @@ export default {
   name:"BlogEdit",
   components:{
     Markdown,
-},
+  },
   data() {
     return {
-      data: {
-        value: "# oaosdvmapsdv",
-        id:"",
+      blogInfo: {
+        title: '',
+        content: '',
+        abstract: '',
+        tags:[],
       },
       config: {
         subfield: true,// 单双栏模式
@@ -30,13 +32,15 @@ export default {
   },
   mounted() {
     this.$bus.$emit('useMouse');
+    // 前往编辑博客，通过路由传参
+    this.blogInfo = this.$route.params.blog ? this.$route.params.blog : this.blogInfo;
   },
   destroyed() {
     this.$bus.$emit('useMouse');
   },
   methods: {
     submit() {
-      console.log(this.value);
+      console.log(this.data.value);
     }
   },
   computed: {

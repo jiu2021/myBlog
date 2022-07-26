@@ -2,18 +2,20 @@
   <div class="blogs" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
     <div class="blog-content">
       <div class="blog-title">
-        <div class="title-content" ref="titleContent">标题</div>
+        <div class="title-content" ref="titleContent">{{blog.title}}</div>
         <div class="view-nums">
           <img src="@/assets/svg/hot.svg" class="view" />
-          <span class="nums">110</span>
+          <span class="nums">{{blog.visited}}</span>
         </div>
       </div>
-      <div class="blog-outline">梗概</div>
+      <div class="blog-outline">{{blog.abstract}}</div>
       <div class="blog-information">
-        <div class="tag-content">
-          <Tags/>
-        </div>
-        <div class="date-content">日期</div>
+        <ul class="tag-content">
+          <li v-for="(tag,index) in blog.tags" :key="index" class="tag"> 
+            <Tags :name="tag"/>
+          </li>
+        </ul>
+        <div class="date-content">{{blog.date}}</div>
       </div>
     </div>
     <div class="blog-decoration">
@@ -25,40 +27,55 @@
 </template>
 
 <script>
+import Tags from '../Tags/index.vue';
 export default {
-  name:"Blog",
-  mounted() {
-    this.borderBlink();
-    this.titleBlink();
-  },
-  methods:{
-    //流光边框
-    borderBlink() {
-      const blogDecoA = this.$refs.blogDecoA;
-      const blogDecoB = this.$refs.blogDecoB;
-      const blogDecoC = this.$refs.blogDecoC;
-      let degValue = Math.round(Math.random() * 180);
-      blogDecoA.style.setProperty("--begin-deg", degValue + 'deg');
-      blogDecoB.style.setProperty("--begin-deg", degValue + 'deg');
-      blogDecoC.style.setProperty("--begin-deg", degValue + 'deg');
+  name: "Blog",
+  props: {
+    blog: {
+      type: Object,
+      default: function () {
+        return {
+          title: '标题',
+          abstract:'阿萨德氯碱苏东坡你的哦啊哦VN八艘盆地不能老是拿购票人爱上高送回家呢爱狗爱很容易铁五然后呢am',
+          visited: 999,
+          tags: ['标签'],
+          date:'2022-05-20'
+          }
+        }
+      }
     },
-    //标题闪烁
-    titleBlink() {
-      const title = this.$refs.titleContent;
-      title.setAttribute('data-title', title.innerHTML);
+    mounted() {
+        this.borderBlink();
+        this.titleBlink();
     },
-    mouseReverse() {
-     this.$bus.$emit('mouseReverse');
-   },
-   mouseRecover() {
-     this.$bus.$emit('mouseRecover');
-   },
-    showMask(){
-     this.$bus.$emit('showMask');
-   }
-  },
-  computed:{
-  }
+    methods: {
+        //流光边框
+        borderBlink() {
+            const blogDecoA = this.$refs.blogDecoA;
+            const blogDecoB = this.$refs.blogDecoB;
+            const blogDecoC = this.$refs.blogDecoC;
+            let degValue = Math.round(Math.random() * 180);
+            blogDecoA.style.setProperty("--begin-deg", degValue + "deg");
+            blogDecoB.style.setProperty("--begin-deg", degValue + "deg");
+            blogDecoC.style.setProperty("--begin-deg", degValue + "deg");
+        },
+        //标题闪烁
+        titleBlink() {
+            const title = this.$refs.titleContent;
+            title.setAttribute("data-title", title.innerHTML);
+        },
+        mouseReverse() {
+            this.$bus.$emit("mouseReverse");
+        },
+        mouseRecover() {
+            this.$bus.$emit("mouseRecover");
+        },
+        showMask() {
+            this.$bus.$emit("showMask");
+        }
+    },
+    computed: {},
+    components: { Tags }
 }
 </script>
 
@@ -106,7 +123,7 @@ export default {
   font-size: 0.8rem;
   color: #b1b1b1;
   max-height: 2rem;
-  padding: 0.2rem 0;
+  padding: 0.5rem 0;
   overflow: hidden;
 }
 
@@ -164,6 +181,11 @@ export default {
   left: -2px;
   text-shadow: -2px 0 #00dffc, 2px 2px #ff00c1;
   animation: title-blink 0.2s infinite alternate-reverse;
+}
+
+.tag {
+  display: inline-block;
+  margin-right: .2rem;
 }
 
 @keyframes title-blink {

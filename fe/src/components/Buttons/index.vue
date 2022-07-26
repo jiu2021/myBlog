@@ -1,11 +1,11 @@
 <template>
   <div class="button-container">
     <button class="buttons" @click="goPage()" @mouseover="mouseReverse()" @mouseleave="mouseRecover()">
-        <span class="bt-content">{{content}}</span>
-        <div class="bt-decoration-a"></div>
-        <div class="bt-decoration-b"></div>
-        <div class="bt-decoration-c"></div>
-      </button>
+      <span class="bt-content">{{content}}</span>
+      <div class="bt-decoration-a"></div>
+      <div class="bt-decoration-b"></div>
+      <div class="bt-decoration-c"></div>
+    </button>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
      let router = '';
      switch (this.content)
      {
-       case '文章':router = '/home' 
+       case '文章':router = '/home'
        break;
        case '关于我':router = '/about'
        break;

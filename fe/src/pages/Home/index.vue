@@ -9,7 +9,11 @@
         <router-view></router-view>
       </div>
       <div id="tag-container">
-        <Tags/>
+        <ul class="tag-content">
+          <li v-for="(tag,index) in tagList" :key="index" class="tag"> 
+            <Tags :name="tag.name"/>
+          </li>
+        </ul>
       </div>
     </div>
     <Footer />
@@ -19,12 +23,15 @@
 <script>
 export default {
   name:"Home",
-  components: {
-  },
   data() {
     return {
+      tagList:[],
       blogview:true,
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('getTagList');
+    this.tagList = this.$store.state.tag.tagList;
   },
   methods:{
   }
@@ -62,4 +69,20 @@ export default {
 
 
 /*主体样式*/
+
+.tag {
+  display: inline-block;
+  margin-right: .2rem;
+}
+
+@media screen and (max-width: 750px) {
+  #menu-container,
+  #tag-container {
+    display: none;
+  }
+  #main {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
 </style>

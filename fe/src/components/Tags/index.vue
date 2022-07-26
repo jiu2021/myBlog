@@ -1,12 +1,13 @@
 <template>
   <div class="tags" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
-    标签
+    {{name}}
   </div>
 </template>
 
 <script>
 export default {
-  name:"Tags",
+  name: "Tags",
+  props:['name'],
   methods:{
   mouseReverse() {
      this.$bus.$emit('mouseReverse');

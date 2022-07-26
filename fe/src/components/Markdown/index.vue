@@ -1,7 +1,7 @@
 <template>
   <div class="md-wrapper">
     <mavon-editor 
-      v-model="data.value" 
+      v-model="content" 
       :subfield="config.subfield"    
       :defaultOpen="config.defaultOpen"
       :toolbarsFlag="config.toolbarsFlag"
@@ -14,14 +14,23 @@
 <script>
 export default {
   name:"Markdown",
-  props:['config','data'],
+  props:['config','blogInfo'],
   data() {
     return {
+      content:'',
     }
   },
-  computed: {
+  watch: {
+    blogInfo: {
+      deep: true,
+      immediate: true,
+      handler(newValue) {
+        this.content = newValue.content;
+        // 强制刷新
+        this.$forceUpdate();
+      }
+    }
   }
-  
 }
 </script>
 

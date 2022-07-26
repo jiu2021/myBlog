@@ -45,7 +45,7 @@ let router = new VueRouter({
             component: BlogList
           },
           {
-            path: "/blogview/:id?",
+            path: "/blogview",
             name: "blogview",
             component: BlogView,
           }
@@ -73,6 +73,11 @@ let router = new VueRouter({
     {
       path: "/blogedit",
       name: "blogedit",
+      component: BlogEdit,
+    },
+    {
+      path: "/blogpub",
+      name: "blogpub",
       component: BlogEdit,
     },
     //重定向，初始化首页

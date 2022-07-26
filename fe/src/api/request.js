@@ -15,9 +15,10 @@ const request = axios.create({
 //请求拦截器：发请求之前，请求拦截器可以检测到
 request.interceptors.request.use((config) => {
   //config:配置对象，其中有一个重要属性，headers请求头
+  //console.log(config);
   //携带token给服务器
   if (store.state.user.token) {
-    console.log('发送token')
+    console.log('发送token');
     config.headers.Authorization = store.state.user.token;
   }
   return config;
@@ -26,7 +27,6 @@ request.interceptors.request.use((config) => {
 //响应拦截器
 request.interceptors.response.use((res) => {
   //成功的回调函数：服务器返回数据后，响应拦截器可以检测到
-  console.log(res.data)
   return res.data;
 }, (err) => {
   //响应失败的回调

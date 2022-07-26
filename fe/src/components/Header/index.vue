@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <div id="header-content">
-      <div id="header-title">jiu。'Blog</div>
+      <div id="header-title">jiu。’Blog</div>
       <div class="header-right">
         <div id="inputer">
           <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
@@ -88,13 +88,13 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  margin-left: 10vw;
 }
 
 #header-title {
   font-size: 1.5rem;
   line-height: 48px;
   margin-right: 1rem;
+    margin-left: 10vw;
 }
 
 .users {
@@ -164,8 +164,12 @@ export default {
   #menu,
   #header-title,
   #tag-container,
-  .date-content {
+  .date-content,
+  .users {
     display: none;
+  }
+  .header-right {
+    width: 100%;
   }
   #main {
     margin-left: 1rem;

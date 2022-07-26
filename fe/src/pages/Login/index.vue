@@ -1,6 +1,6 @@
 <template>
   <div id="login-wrapper">
-    <div id="login-box">
+    <form id="login-box">
       <div id="account">
         <div class="input-box">
           <span>账号：</span>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <Buttons content = '登录' @click.native="getLogin()"/>
-    </div>
+    </form>
   </div>
 </template>
 

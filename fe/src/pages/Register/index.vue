@@ -18,14 +18,14 @@
       <div id="password" class="input-box">
         <span>密码：</span>
         <div class="inputer">
-          <input type="password" v-model="password"  name="pwd">
+          <input type="password" v-model="password"  name="pwd" autoComplete="off">
           <span class="tip" v-show="isShowPT">5-20位字符！</span>        
         </div>
       </div>
       <div id="passwordVerify" class="input-box">
         <span>确认密码：</span>
         <div class="inputer">
-          <input type="password" v-model="passwordVerify" @keyup.enter="getRegister()">
+          <input type="password" v-model="passwordVerify" @keyup.enter="getRegister()" autoComplete="off">
           <span class="tip" v-show="isShowPVT">密码不一致！</span>
         </div>
       </div>

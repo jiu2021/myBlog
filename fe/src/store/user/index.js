@@ -25,9 +25,9 @@ const actions = {
       //服务器下发token
       if (result.code == 200) {
         //持久化存储token
-        console.log('存储token');
+        /*console.log('存储token');
         console.log(result)
-        localStorage.setItem('Token', result.data.token);
+        localStorage.setItem('Token', result.data.token);*/
         context.commit('USERLOGIN', result.data);
       } else if (result.code == 400) {
         let tipInfo = result.message + '，请重新输入！';
@@ -83,7 +83,7 @@ const mutations = {
 }
 
 const state = {
-  token: localStorage.getItem('Token') || '',
+  token: '',
   //code: '',
   userInfo: {}
 }

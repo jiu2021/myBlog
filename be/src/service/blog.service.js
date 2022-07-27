@@ -22,8 +22,9 @@ class BlogService {
         { content: { $regex: reg } },
         { abstract: { $regex: reg } },
         { tags: { $regex: reg } }
-      ]
-    }, { deleted: false });
+      ],
+      deleted: false
+    });
   }
 
   async createBlog(data) {
@@ -33,7 +34,6 @@ class BlogService {
   async updateBlog(data) {
     const { id, title, content, abstract, tags } = data;
     const res = await Blog.findById(id);
-    console.log(res);
     res.title = title;
     res.content = content;
     res.abstract = abstract;
@@ -42,7 +42,11 @@ class BlogService {
   }
 
   async findBlogById(id) {
-    return await Blog.findById(id);
+    const res = await Blog.findById(id);
+    if (res == null) {
+      return Promise.reject('博客不存在');
+    }
+    return res;
   }
 
   async findBlogsByIds(idArr) {

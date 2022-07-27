@@ -4,8 +4,8 @@
       <div id="header-title">jiu。’Blog</div>
       <div class="header-right">
         <div id="inputer">
-          <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey"/>
-          <img src="@/assets/svg/search.svg" id="search">
+          <input type="text" placeholder="搜索标题、文章、Tag。" v-model="searchKey" @keyup.enter="goSearch()"/>
+          <img src="@/assets/svg/search.svg" id="search" @click="goSearch()">
         </div>
         <div class="users" v-if="!userName"> 
           <span class="login" @click="goLogin()">管理员登录</span>
@@ -55,6 +55,15 @@ export default {
           console.log('取消')
         }
       });
+    },
+    async goSearch() {
+      const key = this.searchKey;
+      if (key.trim() == '') {
+        this.$tip({tipInfo:'输入不能为空！'});
+      } else {
+        this.$bus.$emit('showMask');
+        this.$router.push({ path: `/search/${key}` });
+      }
     }
   },
   computed:{

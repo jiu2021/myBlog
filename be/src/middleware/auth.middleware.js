@@ -42,6 +42,7 @@ const hadAdminPermission = async(ctx, next) => {
 const validator = (rules) => {
   return async(ctx, next) => {
     try {
+      
       ctx.verifyParams(rules);
     } catch (err) {
       console.error('数据格式错误', err);

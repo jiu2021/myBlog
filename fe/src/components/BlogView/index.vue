@@ -14,7 +14,7 @@
             <Tags :name="tag"/>
           </li>
         </ul>
-        <div class="date-content">日期</div>
+        <div class="date-content">{{blogInfo.date}}</div>
       </div>
     </div>
     <Markdown :config="config" :blogInfo="blogInfo" />
@@ -52,14 +52,11 @@ export default {
       }
     }
   }, 
-  mounted() {
-    //this.index = this.$route.params.index ? this.$route.params.index : this.index;
-    //this.blogInfo = this.$store.state.blog.blogList[this.index];
-    this.blogInfo = this.$store.state.blog.blogInfo;
-  },
   methods: {
     edit() {
-      const blog = this.blogInfo;
+      // 深拷贝，防止引用传参产生问题（奇怪，为什么模板数据改变会修改vuex）
+      const blog = JSON.parse(JSON.stringify(this.blogInfo));
+      //const blog = this.blogInfo;
       let user = this.$store.state.user;
       if (user.userInfo && user.userInfo.isAdmin) {
         this.$router.push({
@@ -70,13 +67,7 @@ export default {
         });
       }
       else {
-        this.$tip({
-          tipInfo:'对不起，您不是管理员',
-          cancelBtn:false,
-          confirm() {
-            console.log('确定');
-          },
-        });
+        this.$tip({tipInfo: '对不起，您不是管理员'});
       }
     },
     remove() {
@@ -85,17 +76,19 @@ export default {
         console.log('删除');
       }
       else {
-        this.$tip({
-          tipInfo:'对不起，您不是管理员',
-          cancelBtn:false,
-          confirm() {
-            console.log('确定');
-          },
-        });
+        this.$tip({tipInfo:'对不起，您不是管理员'});
       }
     }
   },
-  computed: {
+  watch: {
+    "$store.state.blog.blogInfo": {
+      deep: true,
+      immediate: true,
+      handler(newValue) {
+        console.log(555);
+        this.blogInfo = newValue;
+      }
+    }
   }
 }
 </script>

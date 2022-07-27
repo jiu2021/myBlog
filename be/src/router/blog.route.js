@@ -7,17 +7,17 @@ const router = new Router({ prefix: '/blogs' });
 
 // 添加博客接口
 router.post('/upload', auth, hadAdminPermission, validator({
-  title: String,
-  content: String,
-  abstract: String,
-  tags: Array
+  title: 'string', //只能用字符串表示类型
+  content: 'string',
+  abstract: 'string',
+  tags: 'array'
 }), upload);
 // 编辑博客接口
 router.put('/:id', auth, hadAdminPermission, validator({
-  title: String,
-  content: String,
-  abstract: String,
-  tags: Array
+  title: 'string',
+  content: 'string',
+  abstract: 'string',
+  tags: 'array'
 }), update);
 // 删除（软）博客接口
 router.delete('/:id', auth, hadAdminPermission, remove);

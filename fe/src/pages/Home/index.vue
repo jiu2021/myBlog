@@ -10,7 +10,7 @@
       </div>
       <div id="tag-container">
         <ul class="tag-content">
-          <li v-for="(tag,index) in tagList" :key="index" class="tag"> 
+          <li v-for="(tag,index) in tagList" :key="index" class="tag" @click="goSearch(index)"> 
             <Tags :name="tag.name"/>
           </li>
         </ul>
@@ -33,7 +33,10 @@ export default {
     await this.$store.dispatch('getTagList');
     this.tagList = this.$store.state.tag.tagList;
   },
-  methods:{
+  methods: {
+    goSearch(index) {
+      this.$router.push({ path: `/tag/${index}` });
+    }
   }
 }
 </script>
@@ -42,6 +45,7 @@ export default {
 /*主体样式*/
 
 #home-wrapper {
+  min-height: 100vh;
   background-color: #202022;
 }
 

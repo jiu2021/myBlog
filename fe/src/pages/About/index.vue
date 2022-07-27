@@ -4,7 +4,7 @@
       <div id="aboutME">
         <div id="headPortrait">
           <div id="portraitImg">
-            <img src="https://jiu2021.github.io/HomePage/homepageImages/portrait.jpg" />
+            <img src="@/assets/images/portrait.jpg" />
           </div>
           <div id="portrait-decoretion"></div>
         </div>

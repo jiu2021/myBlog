@@ -17,7 +17,7 @@ const mutations = {
 }
 
 const state = {
-  tagList: []
+  tagList: [],
 }
 
 const getters = {}

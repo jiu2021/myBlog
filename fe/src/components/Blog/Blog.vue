@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import Tags from '../Tags/index.vue';
 export default {
   name: "Blog",
   props: {
@@ -73,9 +72,7 @@ export default {
         showMask() {
             this.$bus.$emit("showMask");
         }
-    },
-    computed: {},
-    components: { Tags }
+    }
 }
 </script>
 

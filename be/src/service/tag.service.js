@@ -17,7 +17,6 @@ class TagService {
 
   async findById(tagid) {
     const res = await Tag.findById({ '_id': tagid });
-    console.log(res);
     const blog_ids = res.blog_ids;
     return await findBlogsByIds(blog_ids);
   }

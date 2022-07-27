@@ -1,6 +1,7 @@
 <template>
   <div class="list-wrapper" ref="pageTop">
-    <div id="top-title">文章列表</div>
+    <div id="top-title" v-if="curPage.pageName === 'key'">关键字“{{curPage.search}}”检索结果：</div>
+    <div id="top-title" v-else>标签“{{curPage.tagName}}”检索结果：</div>
     <ul>
       <li v-for="(blog,index) in blogList" :key="index">
         <Blog @click.native="readBlog(index)" :blog="blog"/>
@@ -8,11 +9,7 @@
     </ul>
     <div class="pagination">
       <div>
-        <Buttons :content="`第${pageNum}页，共${Math.ceil(total/pageSize)}页`"/>
-      </div>
-      <div class="btns">
-        <Buttons content="上一页" class="btn" @click.native = "goBlogPage(false)"/>
-        <Buttons content="下一页" class="btn" @click.native = "goBlogPage(true)"/>
+        <Buttons :content="`共${blogList.length}篇文章`"/>
       </div>
     </div>
   </div>
@@ -22,46 +19,22 @@
 import Blog from "@/components/Blog/Blog.vue"
 import Buttons from "../Buttons/index.vue";
 export default {
-  name: "BlogList",
+  name: "SearchBlog",
   components: {
     Blog,
     Buttons
   },
   data() {
     return {
-      pageNum: 1,
-      pageSize: 10,
-      total: 999,
       blogList: [],
+      curPage: {
+        pageName: '',
+        search: '',
+        tagName:''
+      }
     }
   },
-  async mounted() {
-    this.pageNum = this.$store.state.blog.pageNum;
-    this.pageSize = this.$store.state.blog.pageSize;
-    this.total = this.$store.state.blog.total;
-    console.log(this.pageNum, this.pageSize);
-    await this.$store.dispatch('getBlogList', { pageNum: this.pageNum, pageSize: this.pageSize });
-  },
   methods: {
-    async goBlogPage(value) {
-      const pageSize = this.pageSize;
-      const total = this.total;
-      let goPageNum = value ? this.pageNum + 1 : this.pageNum - 1;
-      console.log(goPageNum);
-      if (goPageNum > 0 && goPageNum < total / pageSize + 1) {
-        this.pageNum = goPageNum;
-        await this.$store.dispatch('getBlogList', { pageNum: this.pageNum, pageSize });
-        this.scrollTop();
-      } else {
-        this.$tip({
-          tipInfo:'没有更多博客啦！',
-          cancelBtn:false,
-          confirm() {
-            console.log('确定');
-          },
-        });
-      }
-    },
     readBlog(index) {
       // 阅读博客
       const id = this.blogList[index]._id;
@@ -75,6 +48,15 @@ export default {
         top: pageTop.offsetTop,
         behavior: "smooth",
       });
+    },
+    async searchKey() {
+      if (this.curPage.pageName == 'key') {
+        const key = this.curPage.search;
+        await this.$store.dispatch('searchBlogList', { key });
+      } else {
+        const id = this.curPage.search;
+        await this.$store.dispatch('searchBlogListOfTag', { id });
+      }
     }
   },
   computed: {
@@ -91,6 +73,23 @@ export default {
           that.blogList = newValue;
         });
       }
+    },
+    "$route.fullPath": {
+      immediate: true,
+      handler(newValue) {
+        if (newValue.slice(0,7) == '/search') {
+          this.curPage.pageName = 'key';
+          this.curPage.search = this.$route.params.key;
+        }
+        else if (newValue.slice(0, 4) == '/tag') {
+          this.curPage.pageName = 'tag';
+          const index = this.$route.params.index
+          const tag = this.$store.state.tag.tagList[index];
+          this.curPage.search = tag._id;
+          this.curPage.tagName = tag.name;
+        }
+        this.searchKey();
+      }
     }
   }
 }
@@ -106,13 +105,7 @@ export default {
   }
   .pagination {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-  }
-  .btns {
-    display: flex;
-  }
-  .btn {
-    margin-left: 1rem ;
   }
 </style>

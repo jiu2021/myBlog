@@ -24,7 +24,7 @@ export default {
     "$store.state.user.userInfo": {
       immediate:true,
       deep: true,
-      handler: function (newValue) {
+      handler(newValue) {
         if (newValue && newValue.isAdmin) {
           this.isShowPub = true;
         } else {

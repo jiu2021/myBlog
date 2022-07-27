@@ -35,9 +35,29 @@ export const reqBlog = (data) => request({
   method: 'get'
 });
 
+//查找博客
+export const searchBlog = (data) => request({
+  url: `/blogs/search/${data.key}`,
+  method: 'get'
+});
+
+//发布博客
+export const uploadBlog = (data) => request({
+  url: `/blogs/upload`,
+  data,
+  method: 'post'
+});
+
+
 /*标签api*/
 //获取标签列表
 export const reqTagList = () => request({
   url: `/tags`,
+  method: 'get'
+});
+
+//标签查找
+export const searchBlogByTag = (data) => request({
+  url: `/tags/${data.id}`,
   method: 'get'
 });

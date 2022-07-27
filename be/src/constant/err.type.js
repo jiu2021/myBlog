@@ -69,6 +69,11 @@ module.exports = {
     message: '访问博客失败',
     result: ''
   },
+  searchBlogsError: {
+    code: '10206',
+    message: '查找博客失败',
+    result: ''
+  },
   getTagsListError: {
     code: '10301',
     message: '获取所有标签失败',

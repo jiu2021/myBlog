@@ -22,12 +22,18 @@ export default {
   },
   watch: {
     blogInfo: {
-      deep: true,
+      //deep: true, //该对象被一整个替换时，重新渲染，单独修改时不需要渲染
       immediate: true,
       handler(newValue) {
         this.content = newValue.content;
-        // 强制刷新
-        this.$forceUpdate();
+      }
+    },
+    content: {
+      immediate:false,
+      handler(newValue) {
+        // 把最新内容传给编辑组件
+        console.log('111');
+        this.$emit('getContent', newValue);
       }
     }
   }
@@ -45,9 +51,6 @@ export default {
     color: var(--font-color)!important;
   }
   .md-wrapper /deep/ .v-note-op {
-    position: fixed;
-    top:49px;
-    width: 90%;
     padding: 0;
     border-radius: 0;
     border: 0;

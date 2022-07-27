@@ -11,6 +11,7 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import BlogList from '@/components/Blog'
 import BlogEdit from '@/components/BlogEdit'
+import SearchBlog from "@/components/Blog/SearchBlog.vue";
 //引入store
 import store from '@/store'
 
@@ -42,12 +43,22 @@ let router = new VueRouter({
       children: [{
             path: "",
             name: "bloglist",
-            component: BlogList
+            component: BlogList,
           },
           {
-            path: "/blogview",
+            path: "/blogview/:id",
             name: "blogview",
             component: BlogView,
+          },
+          {
+            path: "/search/:key",
+            name: "blogListOfKey",
+            component: SearchBlog,
+          },
+          {
+            path: "/tag/:index",
+            name: "blogListOfTag",
+            component: SearchBlog,
           }
         ]
         //meta: { show: true }

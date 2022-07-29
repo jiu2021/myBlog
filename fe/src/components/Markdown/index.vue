@@ -17,7 +17,8 @@ export default {
   props:['config','blogInfo'],
   data() {
     return {
-      content:'',
+      content: '',
+      timer:null
     }
   },
   watch: {
@@ -31,9 +32,14 @@ export default {
     content: {
       immediate:false,
       handler(newValue) {
-        // 把最新内容传给编辑组件
-        console.log('111');
-        this.$emit('getContent', newValue);
+        if (this.timer) {
+          clearTimeout(this.timer);
+        }
+        const that = this;
+        this.timer = setTimeout(() => {
+          console.log('111');
+          that.$emit('getContent', newValue); // 把最新内容传给编辑组件
+        }, 500);
       }
     }
   }

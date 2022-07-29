@@ -1,4 +1,4 @@
-import { reqBlogList, reqBlog, searchBlog, searchBlogByTag, uploadBlog } from "@/api"
+import { reqBlogList, reqBlog, reqSearch, reqSearchByTag, reqUpload, reqEdit, reqDelete } from "@/api"
 const actions = {
   async getBlogList(ctx, page) {
     const res = await reqBlogList(page);
@@ -11,7 +11,7 @@ const actions = {
     }
   },
   async readBlog(ctx, id) {
-    const res = await reqBlog(id);
+    const res = await reqBlog({ id });
     if (res.code == 200) {
       ctx.commit('READBLOG', res.result);
     } else {
@@ -19,35 +19,49 @@ const actions = {
     }
   },
   async searchBlogList(ctx, key) {
-    const res = await searchBlog(key);
+    const res = await reqSearch({ key });
     if (res.code == 200) {
       console.log(res);
       const list = res.result;
       ctx.commit('SETBLOGLIST', { list });
-      return Promise.resolve(list.length);
     } else {
       console.log('查找博客列表失败');
-      return Promise.resolve(-1);
     }
   },
   async searchBlogListOfTag(ctx, id) {
-    const res = await searchBlogByTag(id);
+    const res = await reqSearchByTag({ id });
     if (res.code == 200) {
       console.log(res);
       const list = res.result;
       ctx.commit('SETBLOGLIST', { list });
-      return Promise.resolve(list.length);
     } else {
       console.log('查找标签下的博客列表失败');
-      return Promise.resolve(-1);
     }
   },
   async pubBlog(ctx, blog) {
-    const res = await uploadBlog(blog);
+    const res = await reqUpload(blog);
+    if (res.code == 200) {
+      return Promise.resolve(res.result);
+    } else {
+      console.log('发布博客失败');
+      return Promise.resolve(false);
+    }
+  },
+  async editBlog(ctx, data) {
+    console.log(data);
+    const res = await reqEdit(data.id, data.blog);
     if (res.code == 200) {
       console.log(res);
     } else {
-      console.log('发布博客失败');
+      console.log('编辑博客失败');
+    }
+  },
+  async deleteBlog(ctx, id) {
+    const res = await reqDelete({ id });
+    if (res.code == 200) {
+      console.log(res);
+    } else {
+      console.log('删除博客失败');
     }
   },
 }

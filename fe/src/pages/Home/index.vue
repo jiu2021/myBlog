@@ -11,7 +11,7 @@
       <div id="tag-container">
         <ul class="tag-content">
           <li v-for="(tag,index) in tagList" :key="index" class="tag" @click="goSearch(index)"> 
-            <Tags :name="tag.name"/>
+            <Tags :name="tag.name" :num="tag.blog_ids.length"/>
           </li>
         </ul>
       </div>
@@ -77,6 +77,9 @@ export default {
 .tag {
   display: inline-block;
   margin-right: .2rem;
+}
+.tag /deep/ .num {
+  display: inline-block;
 }
 
 @media screen and (max-width: 750px) {

@@ -52,10 +52,10 @@ export default {
     async searchKey() {
       if (this.curPage.pageName == 'key') {
         const key = this.curPage.search;
-        await this.$store.dispatch('searchBlogList', { key });
+        await this.$store.dispatch('searchBlogList', key);
       } else {
         const id = this.curPage.search;
-        await this.$store.dispatch('searchBlogListOfTag', { id });
+        await this.$store.dispatch('searchBlogListOfTag', id);
       }
     }
   },

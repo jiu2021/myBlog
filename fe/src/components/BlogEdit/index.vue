@@ -44,7 +44,8 @@ export default {
         abstract: '',
         tags:[],
       },
-      tagString:'',
+      tagString: '',
+      blog_id:'',
       config: {
         subfield: true,// 单双栏模式
         defaultOpen: 'preview',
@@ -57,7 +58,6 @@ export default {
   mounted() {
     // 博客编辑页面还原光标
     this.$bus.$emit('useMouse');
-    
     // 前往编辑博客，通过路由传参
     console.log(this.$route.params.blog);
     this.blogInfo = this.$route.params.blog ? this.$route.params.blog : this.blogInfo;
@@ -70,23 +70,46 @@ export default {
   methods: {
     async submit() {
       this.blogInfo.tags = this.tagString.split(',');
+      const that = this;
       if (this.$route.name == 'blogpub') {
         const blog = this.blogInfo;
-        await this.$store.dispatch('pubBlog', blog);
+        this.$tip({
+          tipInfo:'是否确认提交',
+          cancelBtn:true,
+          async confirm() {
+            that.blog_id = await that.$store.dispatch('pubBlog', blog);
+          },
+          cancel() {
+            console.log('取消');
+          }
+        });
       } else {
-        
+        const blog = this.blogInfo;
+        const id = this.$store.state.blog.blogInfo._id;
+        this.$tip({
+          tipInfo:'是否确认提交',
+          cancelBtn:true,
+          async confirm() {
+            that.blog_id = id;
+            await that.$store.dispatch('editBlog', { id, blog });
+          },
+          cancel() {
+            console.log('取消');
+          }
+        });
       }
       console.log(this.$route);
-
     },
     goBack() {
+      if (this.blog_id != '') {
+        this.$store.dispatch('readBlog', this.blog_id);
+      }
       this.$router.go(-1);
     },
+    // 给markdown绑定自定义事件，获取实时编辑值
     getContent(newContent) {
       this.blogInfo.content = newContent;
     }
-  },
-  computed: {
   }
 }
 </script>

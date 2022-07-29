@@ -117,10 +117,14 @@ export default {
 }
 
 .blog-outline {
+  /*固定文字行数，超行省略*/
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
   font-size: 0.8rem;
   color: #b1b1b1;
-  max-height: 2rem;
-  padding: 0.5rem 0;
+  margin: 0.5rem 0;
   overflow: hidden;
 }
 

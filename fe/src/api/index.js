@@ -29,23 +29,36 @@ export const reqBlogList = (data) => request({
   method: 'get'
 });
 
-//阅读博客
+//访问博客
 export const reqBlog = (data) => request({
   url: `/blogs/read/${data.id}`,
   method: 'get'
 });
 
 //查找博客
-export const searchBlog = (data) => request({
+export const reqSearch = (data) => request({
   url: `/blogs/search/${data.key}`,
   method: 'get'
 });
 
 //发布博客
-export const uploadBlog = (data) => request({
+export const reqUpload = (data) => request({
   url: `/blogs/upload`,
   data,
   method: 'post'
+});
+
+//编辑博客
+export const reqEdit = (id, data) => request({
+  url: `/blogs/${id}`,
+  data,
+  method: 'put'
+});
+
+//删除博客
+export const reqDelete = (data) => request({
+  url: `/blogs/${data.id}`,
+  method: 'delete'
 });
 
 
@@ -57,7 +70,7 @@ export const reqTagList = () => request({
 });
 
 //标签查找
-export const searchBlogByTag = (data) => request({
+export const reqSearchByTag = (data) => request({
   url: `/tags/${data.id}`,
   method: 'get'
 });

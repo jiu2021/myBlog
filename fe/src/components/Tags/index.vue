@@ -1,13 +1,14 @@
 <template>
   <div class="tags" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
     {{name}}
+    <span class="num">{{num}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: "Tags",
-  props:['name'],
+  props:['name','num'],
   methods:{
   mouseReverse() {
      this.$bus.$emit('mouseReverse');
@@ -52,6 +53,8 @@ export default {
 .tags:hover::after {
   opacity: 0.15;
 }
-
+.num {
+  display: none;
+}
 /*标签样式*/
 </style>

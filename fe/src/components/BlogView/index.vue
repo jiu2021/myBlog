@@ -55,7 +55,8 @@ export default {
   methods: {
     edit() {
       // 深拷贝，防止引用传参产生问题（奇怪，为什么模板数据改变会修改vuex）
-      const blog = JSON.parse(JSON.stringify(this.blogInfo));
+      let { title, content, tags, abstract } = this.blogInfo;
+      let blog = { title, content, tags, abstract };
       //const blog = this.blogInfo;
       let user = this.$store.state.user;
       if (user.userInfo && user.userInfo.isAdmin) {
@@ -73,7 +74,18 @@ export default {
     remove() {
       let user = this.$store.state.user;
       if (user.userInfo && user.userInfo.isAdmin) {
-        console.log('删除');
+        const id = this.$store.state.blog.blogInfo._id;
+        const that = this;
+        this.$tip({
+          tipInfo:'是否确认删除这篇文章',
+          cancelBtn:true,
+          async confirm() {
+            await that.$store.dispatch('deleteBlog', id);
+          },
+          cancel() {
+            console.log('取消');
+          }
+        });
       }
       else {
         this.$tip({tipInfo:'对不起，您不是管理员'});
@@ -85,7 +97,6 @@ export default {
       deep: true,
       immediate: true,
       handler(newValue) {
-        console.log(555);
         this.blogInfo = newValue;
       }
     }

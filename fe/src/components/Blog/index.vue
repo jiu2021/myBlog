@@ -53,20 +53,14 @@ export default {
         await this.$store.dispatch('getBlogList', { pageNum: this.pageNum, pageSize });
         this.scrollTop();
       } else {
-        this.$tip({
-          tipInfo:'没有更多博客啦！',
-          cancelBtn:false,
-          confirm() {
-            console.log('确定');
-          },
-        });
+        this.$tip({ tipInfo: '没有更多博客啦！' });
       }
     },
     readBlog(index) {
       // 阅读博客
       const id = this.blogList[index]._id;
       this.$router.push({ name: "blogview", params: { id } });
-      this.$store.dispatch('readBlog', { id });
+      this.$store.dispatch('readBlog', id);
     },
     scrollTop() {
       // 定位到博客列表顶部

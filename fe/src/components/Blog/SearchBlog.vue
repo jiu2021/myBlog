@@ -39,7 +39,7 @@ export default {
       // 阅读博客
       const id = this.blogList[index]._id;
       this.$router.push({ name: "blogview", params: { id } });
-      this.$store.dispatch('readBlog', { id });
+      this.$store.dispatch('readBlog', id);
     },
     scrollTop() {
       // 定位到博客列表顶部

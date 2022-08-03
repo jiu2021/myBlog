@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     async goBlogPage(value) {
+      this.$bus.$emit('showMask');
       const pageSize = this.pageSize;
       const total = this.total;
       let goPageNum = value ? this.pageNum + 1 : this.pageNum - 1;

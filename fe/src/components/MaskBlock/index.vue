@@ -41,8 +41,8 @@ export default {
             maskBlocks[i].style.display = 'none';
           }
           mask.style.display = 'none';
-        }, 800);
-      }, 800);
+        }, 1000);
+      }, 1000);
     },
     //获取鼠标位置
     getMousePos(event) {

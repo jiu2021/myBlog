@@ -1,6 +1,6 @@
 <template>
   <div class="button-container">
-    <button class="buttons" @click="goPage()" @mouseover="mouseReverse()" @mouseleave="mouseRecover()">
+    <button class="buttons" @mouseover="mouseReverse()" @mouseleave="mouseRecover()">
       <span class="bt-content">{{content}}</span>
       <div class="bt-decoration-a"></div>
       <div class="bt-decoration-b"></div>
@@ -14,19 +14,6 @@ export default {
  name:"Buttons",
  props:['content'],
  methods:{
-   goPage() {
-     let router = '';
-     switch (this.content)
-     {
-       case '文章':router = '/home'
-       break;
-       case '关于我':router = '/about'
-       break;
-     }
-     if(router) {
-      this.$router.push(router);
-     }
-   },
    mouseReverse() {
      this.$bus.$emit('mouseReverse');
    },
@@ -47,7 +34,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 60px;
   background-color: transparent;
 }

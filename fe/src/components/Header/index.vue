@@ -16,19 +16,19 @@
           <span class="register" @click="getLogout()">退出登录</span>
         </div>
       </div>
-
-      <img src="@/assets/svg/menu.svg" id="show-nav"/>
+      <img src="@/assets/svg/menu.svg" id="show-nav" @click="showNav()"/>
     </div>
-    <div id="nav-bar">
+    <div id="nav-bar" ref="nav" @click="closeNav()">
       <h2>站内导航</h2>
-      <Buttons content = '关于我'/>
-      <Buttons content = '文章'/>
+      <Buttons content = '关于我' @click.native.stop="goPage('关于我')"/>
+      <Buttons content = '文章' @click.native.stop="goPage('文章')"/>
       <Buttons content = '简历'/>
     </div>
   </div>
 </template>
 
 <script>
+import { switchPage } from "@/utils";
 export default {
   name:"Header",
   data() {
@@ -64,6 +64,23 @@ export default {
         this.$bus.$emit('showMask');
         this.$router.push({ path: `/search/${key}` });
       }
+    },
+    showNav() {
+      const nav = this.$refs.nav;
+      nav.style.display = 'flex';
+      setTimeout(() => {
+        nav.style.height = '100vh';
+      }, 0);
+    },
+    closeNav() {
+      const nav = this.$refs.nav;
+      nav.style.height = '0';
+      setTimeout(() => {
+        nav.style.display = 'none';
+      }, 0);
+    },
+    goPage(page) {
+      switchPage(this, page);
     }
   },
   computed:{

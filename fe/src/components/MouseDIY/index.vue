@@ -68,4 +68,9 @@ methods:{
 }
 
 /*自定义鼠标*/
+@media screen and (max-width: 750px) {
+  #mouse-DIY {
+    display: none;
+  }
+}
 </style>

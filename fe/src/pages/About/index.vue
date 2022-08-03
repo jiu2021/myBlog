@@ -12,7 +12,7 @@
           <span id="text-content" ref="textContent"></span>
         </div>
         <div class="button-container">
-          <Buttons content ='文章'></Buttons>
+          <Buttons content ='文章' @click.native="goPage('文章')"></Buttons>
           <Buttons content ='简历'></Buttons>
         </div>
       </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-
+import { switchPage } from '@/utils';
 export default {
  name:"About",
   data() {
@@ -44,7 +44,10 @@ export default {
     clearInterval(this.timer);
   },
 
-  methods:{
+  methods: {
+    goPage(page) {
+      switchPage(this, page);
+    }
   }
 }
 </script>

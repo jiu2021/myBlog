@@ -1,5 +1,5 @@
 <template>
-  <div class="box-wrapper" v-if="isShow">
+  <div class="box-wrapper" v-if="isShow" @touchmove.prevent @mousewheel="mousewheel">
     <div class="box">
       <div class="box-info">
         {{tipInfo}}
@@ -35,6 +35,9 @@ export default {
       // 取消
       this.a_cancel && this.a_cancel();
       this.isShow = false;
+    },
+    mousewheel(e){
+      e.preventDefault();
     }
   }
 }
@@ -42,21 +45,23 @@ export default {
 
 <style>
   .box-wrapper {
-    display: flex;
-    justify-content: center;
     position: absolute;
     top:0;
     bottom: 0;
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 2;
+    z-index: 5;
   }
 
   .box {
     display: flex;
     flex-flow: column;
     align-self: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     width:300px;
     background-color:#353536;
     color: #00dffc;

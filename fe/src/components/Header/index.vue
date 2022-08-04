@@ -21,8 +21,8 @@
     <div id="nav-bar" ref="nav" @click="closeNav()">
       <h2>站内导航</h2>
       <Buttons content = '关于我' @click.native.stop="goPage('关于我')"/>
-      <Buttons content = '文章' @click.native.stop="goPage('文章')"/>
-      <Buttons content = '简历'/>
+      <Buttons content = '文章' @click.native="goPage('文章')"/>
+      <Buttons content = '简历' @click.native.stop="goPage('简历')"/>
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@ export default {
       nav.style.height = '0';
       setTimeout(() => {
         nav.style.display = 'none';
-      }, 0);
+      }, 500);
     },
     goPage(page) {
       switchPage(this, page);

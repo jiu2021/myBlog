@@ -45,6 +45,7 @@ export default {
 /*主体样式*/
 
 #home-wrapper {
+  width: 100vw;
   min-height: 100vh;
   background-color: #202022;
 }
@@ -88,6 +89,7 @@ export default {
     display: none;
   }
   #main {
+    display: block;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }

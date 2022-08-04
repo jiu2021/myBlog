@@ -13,7 +13,7 @@
         </div>
         <div class="button-container">
           <Buttons content ='文章' @click.native="goPage('文章')"></Buttons>
-          <Buttons content ='简历'></Buttons>
+          <Buttons content ='简历' @click.native="goPage('简历')"></Buttons>
         </div>
       </div>
     </transition>
@@ -30,15 +30,15 @@ export default {
     }
   },
   mounted() {
-    let text = '<p>Welcome to<p/> <h3>Blog!<h3/>'
+    let text = '<p>Welcome to<h2>jiu。’Blog<p>Contact me: { <p>email:1358940365@qq.com<p>github:https://github.com/jiu2021<p>}'
     var i = 0;
       this.timer = setInterval(() => {
-      if(i < text.length) {
+      if(i < text.length+1) {
       let str = text.substr(0,i);
       this.$refs.textContent.innerHTML = str+'_';
       i++;
       }
-    }, 250);
+    }, 200);
   },
   beforeDestroy() {
     clearInterval(this.timer);
@@ -56,8 +56,8 @@ export default {
 /*aboutME*/
 
 #about-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 #aboutME {
@@ -152,15 +152,23 @@ export default {
   white-space: pre-wrap;
   word-break: break-all;
   font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
-  line-height: 1.25;
+  line-height: 1.5rem;
 }
-
-#aboutME h4 {
-  color: #00dffc!important;
+#text-content /deep/ p {
+  font-size: 1rem;
+  text-align: left;
 }
-
+#text-content /deep/ h2 {
+  font-size: 20px;
+  color: #00dffc;
+}
+#text-content /deep/ h2>p{
+  font-size: 14px;
+  text-align: left;
+  color: white;
+}
 #aboutME .button-container {
-  margin-top: 4rem;
+  margin-top: 2.5rem;
   width: 380px;
   display: flex;
 }

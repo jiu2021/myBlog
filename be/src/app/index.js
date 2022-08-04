@@ -29,7 +29,9 @@ app.use(userRouter.routes());
 app.use(blogRouter.routes());
 app.use(tagRouter.routes());
 
-//统一错误处理
+// 导入配置文件
+require('dotenv').config();
+//  统一错误处理
 app.on('error', errHandler);
 
 module.exports = app;

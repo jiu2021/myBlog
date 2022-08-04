@@ -12,8 +12,9 @@
       <div class="blog-information">
         <ul class="tag-content">
           <li v-for="(tag,index) in blog.tags" :key="index" class="tag"> 
-            <Tags :name="tag"/>
+            <Tags :name="tag" v-show="index < maxTag"/>
           </li>
+          <span v-show="blog.tags.length > maxTag" class="duoyu">...</span>
         </ul>
         <div class="date-content">{{blog.date}}</div>
       </div>
@@ -42,10 +43,21 @@ export default {
           }
         }
       }
-    },
+  },
+  data() {
+    return {
+      maxTag:6
+    }
+  },
     mounted() {
-        this.borderBlink();
-        this.titleBlink();
+      this.borderBlink();
+      this.titleBlink();
+      const winwidth = document.documentElement.clientWidth;
+      if (winwidth < 750) {
+        this.maxTag = 3;
+      } else {
+        this.maxTag = 6;
+      }
     },
     methods: {
         //流光边框
@@ -188,7 +200,10 @@ export default {
   display: inline-block;
   margin-right: .2rem;
 }
-
+.duoyu {
+  color: #00dffc;
+  font-weight: 1000;
+}
 @keyframes title-blink {
   0% {
     opacity: 0;

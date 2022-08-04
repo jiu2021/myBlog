@@ -7,7 +7,7 @@ import axios from "axios"
 const request = axios.create({
   //配置对象
   //基础路径，发请求时自动在路径中添加
-  baseURL: "",
+  baseURL: "/api",
   //超时5s
   timeout: 5000,
 })
@@ -18,7 +18,7 @@ request.interceptors.request.use((config) => {
   //console.log(config);
   //携带token给服务器
   if (store.state.user.token) {
-    console.log('发送token');
+    //console.log('发送token');
     config.headers.Authorization = store.state.user.token;
   }
   return config;

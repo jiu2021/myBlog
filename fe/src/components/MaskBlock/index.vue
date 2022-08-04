@@ -22,9 +22,11 @@ export default {
       mask.style.display = 'block';
   
       setTimeout(() => {
+        let topArr = [];
+        let leftArr = [];
         for (let i = 0; i < maskBlocks.length; i++) {
-          var topValue = Math.round(Math.random() * 100 - 5);
-          var leftValue = Math.round(Math.random() * 100 - 5);
+          let topValue = Math.round(Math.random() * 100 - 5);
+          let leftValue = Math.round(Math.random() * 100 - 5);
           maskBlocks[i].style.top = topValue + '%';
           maskBlocks[i].style.left = leftValue + '%';
           let degValue = Math.round(Math.random() * 360);
@@ -67,8 +69,8 @@ export default {
 .mask-block {
   display: none;
   position: fixed;
-  width: 19vmin;
-  height: 19vmin;
+  width: 20vmin;
+  height: 20vmin;
   background-color: #202022;
   border: 1px solid #00dffc;
   z-index: 80;

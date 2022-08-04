@@ -2,7 +2,7 @@
   <div id="menu">
     <Buttons content = '关于我' @click.native="goPage('关于我')"/>
     <Buttons content = '文章' @click.native="goPage('文章')"/>
-    <Buttons content = '简历'/>
+    <Buttons content = '简历' @click.native="goPage('简历')"/>
     <Buttons content = '发布文章' v-show="isShowPub" @click.native="goPub()"/>
   </div>
 </template>

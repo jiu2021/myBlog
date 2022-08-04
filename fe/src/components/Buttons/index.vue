@@ -132,6 +132,13 @@ export default {
   animation: shake-bt-c 6s linear infinite;
 }
 
+@media screen and (max-width: 750px) {
+  .bt-content {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}
+
 @keyframes shake-bt-a {
   0% {
     width: 1rem;

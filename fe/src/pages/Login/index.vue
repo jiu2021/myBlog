@@ -67,7 +67,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #202022;
   }
 

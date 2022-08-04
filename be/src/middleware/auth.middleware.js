@@ -1,15 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-// @ts-ignore
-const { JWT_SECRET } = require('../config/config.default');
-
 const { tokenExpireError, invalidToken, hasNotAdminPermission, formatError } = require('../constant/err.type');
-
 const auth = async(ctx, next) => {
   const { authorization = '' } = ctx.request.header;
   const token = authorization.replace('Bearer ', '');
   try {
-    const user = jwt.verify(token, JWT_SECRET);
+    const user = jwt.verify(token, `${process.env.JWT_SECRET}`);
     ctx.state.user = user;
   } catch (err) {
     switch (err.name) {
@@ -42,7 +38,7 @@ const hadAdminPermission = async(ctx, next) => {
 const validator = (rules) => {
   return async(ctx, next) => {
     try {
-      
+
       ctx.verifyParams(rules);
     } catch (err) {
       console.error('数据格式错误', err);

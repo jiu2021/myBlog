@@ -1,8 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-// @ts-ignore
-const { JWT_SECRET } = require('../config/config.default');
-
 const { creatUser, getUserInfo } = require('../service/user.service');
 const { userRegisterError, userLoginError } = require('../constant/err.type');
 class UserController {
@@ -34,7 +31,7 @@ class UserController {
         code: 200,
         message: '用户登录成功',
         data: {
-          token: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' })
+          token: jwt.sign(res, `${process.env.JWT_SECRET}`, { expiresIn: '1d' })
         }
       }
     } catch (err) {

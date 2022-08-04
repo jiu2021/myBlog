@@ -8,6 +8,9 @@ export const switchPage = (that, page) => {
     case '关于我':
       router = '/about'
       break;
+    case '简历':
+      that.$tip({ tipInfo: '制作中！' });
+      break;
   }
   if (router) {
     that.$router.push(router);

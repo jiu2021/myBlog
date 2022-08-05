@@ -9,11 +9,12 @@
         </div>
         <div class="users" v-if="!userName"> 
           <span class="login" @click="goLogin()">管理员登录</span>
-          <span class="register" @click="goRegister()">注册</span>
         </div>
         <div class="users" v-else> 
-          <span class="login">{{userName}}，已登录</span>
-          <span class="register" @click="getLogout()">退出登录</span>
+          <span class="login_y">
+            {{userName}}，已登录
+          </span>
+          <span @click="getLogout()" class="logout">退出登录</span>
         </div>
       </div>
       <img src="@/assets/svg/menu.svg" id="show-nav" @click="showNav()"/>
@@ -61,7 +62,6 @@ export default {
       if (key.trim() == '') {
         this.$tip({tipInfo:'输入不能为空！'});
       } else {
-        this.$bus.$emit('showMask');
         this.$router.push({ path: `/search/${key}` });
       }
     },
@@ -131,10 +131,14 @@ export default {
 .login {
   margin:0 2rem 0 10vw;
 }
+.login_y {
+    margin:0 0.5rem 0 10vw;
+}
 
-.register {
-  display: none;
+.logout {
+  border-left:solid 1px #00dffc ;
   padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 #inputer {

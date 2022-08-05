@@ -53,7 +53,6 @@ const actions = {
   async getUserInfo(context) {
     let result = await reqUserInfo();
     if (result.code == 200) {
-      console.log(result);
       context.commit('GETUSERINFO', result.data);
     } else {
       return Promise.reject(new Error(result.message));
@@ -78,7 +77,6 @@ const mutations = {
   USERLOGOUT(state, value) {
     state.token = '';
     state.userInfo = {};
-    localStorage.removeItem('Token');
   }
 }
 

@@ -21,7 +21,6 @@ const actions = {
   async searchBlogList(ctx, key) {
     const res = await reqSearch({ key });
     if (res.code == 200) {
-      console.log(res);
       const list = res.result;
       ctx.commit('SETBLOGLIST', { list });
     } else {
@@ -31,7 +30,6 @@ const actions = {
   async searchBlogListOfTag(ctx, id) {
     const res = await reqSearchByTag({ id });
     if (res.code == 200) {
-      console.log(res);
       const list = res.result;
       ctx.commit('SETBLOGLIST', { list });
     } else {
@@ -52,16 +50,20 @@ const actions = {
     const res = await reqEdit(data.id, data.blog);
     if (res.code == 200) {
       console.log(res);
+      return Promise.resolve(true);
     } else {
       console.log('编辑博客失败');
+      return Promise.resolve(false);
     }
   },
   async deleteBlog(ctx, id) {
     const res = await reqDelete({ id });
     if (res.code == 200) {
       console.log(res);
+      return Promise.resolve(true);
     } else {
       console.log('删除博客失败');
+      return Promise.resolve(false);
     }
   },
 }

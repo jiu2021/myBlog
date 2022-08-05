@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper" ref="pageTop">
+  <div class="list-wrapper">
     <div id="top-title">文章列表</div>
     <ul>
       <li v-for="(blog,index) in blogList" :key="index">
@@ -39,16 +39,15 @@ export default {
     this.pageNum = this.$store.state.blog.pageNum;
     this.pageSize = this.$store.state.blog.pageSize;
     this.total = this.$store.state.blog.total;
-    console.log(this.pageNum, this.pageSize);
+    //console.log(this.pageNum, this.pageSize);
     await this.$store.dispatch('getBlogList', { pageNum: this.pageNum, pageSize: this.pageSize });
   },
   methods: {
     async goBlogPage(value) {
-      this.$bus.$emit('showMask');
       const pageSize = this.pageSize;
       const total = this.total;
       let goPageNum = value ? this.pageNum + 1 : this.pageNum - 1;
-      console.log(goPageNum);
+      //console.log(goPageNum);
       if (goPageNum > 0 && goPageNum < total / pageSize + 1) {
         this.pageNum = goPageNum;
         await this.$store.dispatch('getBlogList', { pageNum: this.pageNum, pageSize });
@@ -57,17 +56,15 @@ export default {
         this.$tip({ tipInfo: '没有更多博客啦！' });
       }
     },
-    readBlog(index) {
+    async readBlog(index) {
       // 阅读博客
       const id = this.blogList[index]._id;
+      await this.$store.dispatch('readBlog', id);
       this.$router.push({ name: "blogview", params: { id } });
-      this.$store.dispatch('readBlog', id);
     },
     scrollTop() {
-      // 定位到博客列表顶部
-      const pageTop = this.$refs.pageTop;
       window.scrollTo({
-        top: pageTop.offsetTop,
+        top: 0,
         behavior: "smooth",
       });
     }

@@ -7,7 +7,7 @@ export default {
   name: "MouseDIY",
   data() {
     return {
-      isShow:true
+      isShow: true,
   }
 },
 mounted() {
@@ -29,6 +29,7 @@ mounted() {
     this.isShow = !this.isShow;
   })
   this.mouseMove();
+  this.forTouch();
 },
 methods:{
     //自定义鼠标
@@ -43,6 +44,14 @@ methods:{
   getMousePos(event) {
     var e = event || window.event;
     return { "x": e.clientX, "y": e.clientY };
+  },
+  forTouch() {
+    let isTouchDevice = 'ontouchstart' in document.documentElement;
+    if (isTouchDevice) {
+      this.isShow = false;
+    } else {
+      this.isShow = true;
+    }
   }
 }
 }

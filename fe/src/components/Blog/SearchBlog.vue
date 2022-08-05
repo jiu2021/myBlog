@@ -35,11 +35,11 @@ export default {
     }
   },
   methods: {
-    readBlog(index) {
+    async readBlog(index) {
       // 阅读博客
       const id = this.blogList[index]._id;
+      await this.$store.dispatch('readBlog', id);
       this.$router.push({ name: "blogview", params: { id } });
-      this.$store.dispatch('readBlog', id);
     },
     scrollTop() {
       // 定位到博客列表顶部

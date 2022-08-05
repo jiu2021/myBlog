@@ -8,22 +8,20 @@
 export default {
   name:"MaskBlock",
   mounted() {
-    this.$bus.$on('showMask',()=>this.showMask());
+    this.$bus.$on('showMask',(e)=>this.showMask(e));
   },
   methods:{
-    showMask() {
+    showMask(e) {
       const maskBlocks = this.$refs.eachMaskBlock
       const mask = this.$refs.maskWrapper;
       for (let i = 0; i < maskBlocks.length; i++) {
-        maskBlocks[i].style.top = this.getMousePos().y + 'px';
-        maskBlocks[i].style.left = this.getMousePos().x + 'px';
+        maskBlocks[i].style.top = this.getMousePos(e).y + 'px';
+        maskBlocks[i].style.left = this.getMousePos(e).x + 'px';
         maskBlocks[i].style.display = 'block';
       }
       mask.style.display = 'block';
   
       setTimeout(() => {
-        let topArr = [];
-        let leftArr = [];
         for (let i = 0; i < maskBlocks.length; i++) {
           let topValue = Math.round(Math.random() * 100 - 5);
           let leftValue = Math.round(Math.random() * 100 - 5);
@@ -48,7 +46,7 @@ export default {
     },
     //获取鼠标位置
     getMousePos(event) {
-      var e = event || window.event;
+      let e = event || window.event;
       return { "x": e.clientX, "y": e.clientY };
     }
   }

@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 //连接数据库
 
 // 生产环境
-const user = `${process.env.USER}`;
+/*const user = `${process.env.USER}`;
 const pwd = `${process.env.PWD}`;
-mongoose.connect(`mongodb://${user}:${pwd}@124.220.203.249:27017/BLOG`);
+mongoose.connect(`mongodb://${user}:${pwd}@124.220.203.249:27017/BLOG`);*/
 
 //开发环境
-//mongoose.connect('mongodb://localhost:27017/BLOG');
+mongoose.connect('mongodb://localhost:27017/BLOG');
 
 //监听数据库连接状态
 mongoose.connection.once('open', () => {

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @mousemove="mousemove">
     <router-view></router-view>
     <MouseDIY/>
     <MaskBlock/>
@@ -16,10 +16,20 @@ export default {
     MouseDIY,
     MaskBlock
   },
+  data() {
+    return {
+      event: null,
+    }
+  },
+  methods: {
+    mousemove(e) {
+      this.event = e;
+    }
+  },
   watch:{
     $route: {
-      handler: function(val, oldVal){
-        this.$bus.$emit('showMask');
+      handler: function (val, oldVal) {
+        this.$bus.$emit('showMask', this.event);
       }
     }
   }

@@ -78,6 +78,11 @@ export default {
           cancelBtn:true,
           async confirm() {
             that.blog_id = await that.$store.dispatch('pubBlog', blog);
+            if (that.blog_id) {
+              const id = that.blog_id;
+              that.$router.push({ name: "blogview", params: { id } });
+              await that.$store.dispatch('readBlog', id);
+            }
           },
           cancel() {
             console.log('取消');
@@ -91,7 +96,11 @@ export default {
           cancelBtn:true,
           async confirm() {
             that.blog_id = id;
-            await that.$store.dispatch('editBlog', { id, blog });
+            const res = await that.$store.dispatch('editBlog', { id, blog });
+            if (res) {
+              that.$router.push({ name: "blogview", params: { id } });
+              await that.$store.dispatch('readBlog', id);
+            }
           },
           cancel() {
             console.log('取消');
@@ -100,10 +109,7 @@ export default {
       }
       console.log(this.$route);
     },
-    goBack() {
-      if (this.blog_id != '') {
-        this.$store.dispatch('readBlog', this.blog_id);
-      }
+    async goBack() {
       this.$router.go(-1);
     },
     // 给markdown绑定自定义事件，获取实时编辑值

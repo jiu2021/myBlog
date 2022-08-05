@@ -5,7 +5,7 @@ const { register, login } = require('../controller/user.controller');
 const { auth } = require('../middleware/auth.middleware');
 const { userInfo } = require('../controller/user.controller');
 
-const router = new Router({ prefix: '/users' });
+const router = new Router({ prefix: '/api/users' });
 
 // 注册接口
 router.post('/register', registerValidator, verifyRegister, cryptPassword, register);

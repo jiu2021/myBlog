@@ -19,9 +19,6 @@ export default {
    },
    mouseRecover() {
      this.$bus.$emit('mouseRecover');
-   },
-   showMask(){
-     this.$bus.$emit('showMask');
    }
  }
 }
@@ -135,7 +132,7 @@ export default {
 @media screen and (max-width: 750px) {
   .bt-content {
     font-size: 14px;
-    padding: 0 10px;
+    padding: 0 14px;
   }
 }
 

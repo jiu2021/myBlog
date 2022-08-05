@@ -4,13 +4,12 @@ import VueRouter from "vue-router"
 //使用插件
 Vue.use(VueRouter);
 //引入路由组件
-import Home from '@/pages/Home'
-import About from '@/pages/About'
-import BlogView from '@/components/BlogView'
-import Login from '@/pages/Login'
-import Register from '@/pages/Register'
-import BlogList from '@/components/Blog'
-import BlogEdit from '@/components/BlogEdit'
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import BlogView from '@/components/BlogView';
+import BlogList from '@/components/Blog';
 import SearchBlog from "@/components/Blog/SearchBlog.vue";
 //引入store
 import store from '@/store'
@@ -41,55 +40,53 @@ let router = new VueRouter({
       path: "/home",
       component: Home,
       children: [{
-            path: "",
-            name: "bloglist",
-            component: BlogList,
-          },
-          {
-            path: "/blogview/:id",
-            name: "blogview",
-            component: BlogView,
-          },
-          {
-            path: "/search/:key",
-            name: "blogListOfKey",
-            component: SearchBlog,
-          },
-          {
-            path: "/tag/:index",
-            name: "blogListOfTag",
-            component: SearchBlog,
-          }
-        ]
-        //meta: { show: true }
+          path: "",
+          name: "bloglist",
+          component: BlogList,
+        },
+        {
+          path: "/blogview/:id",
+          name: "blogview",
+          component: BlogView,
+        },
+        {
+          path: "/search/:key",
+          name: "blogListOfKey",
+          component: SearchBlog,
+        },
+        {
+          path: "/tag/:index",
+          name: "blogListOfTag",
+          component: SearchBlog,
+        }
+      ]
     },
     {
       path: "/about",
       name: "about",
       component: About,
-      //meta: { show: false }
     },
     {
       path: "/login",
       name: "login",
       component: Login,
-      //meta: { show: false }
     },
     {
       path: "/register",
       name: "register",
       component: Register,
-      //meta: { show: false }
     },
     {
       path: "/blogedit",
       name: "blogedit",
-      component: BlogEdit,
+      component: () =>
+        import ('@/components/BlogEdit'),
     },
     {
       path: "/blogpub",
       name: "blogpub",
-      component: BlogEdit,
+      component: () =>
+        import ('@/components/BlogEdit'),
     },
     //重定向，初始化首页
     {
@@ -101,8 +98,8 @@ let router = new VueRouter({
 
 //全局前置守卫
 router.beforeEach(async(to, from, next) => {
-  let token = store.state.user.token;
-  let name = store.state.user.userInfo.username;
+  const token = store.state.user.token;
+  const { username, isAdmin } = store.state.user.userInfo;
   if (token) {
     //用户登录了
     //console.log('有token');
@@ -110,7 +107,7 @@ router.beforeEach(async(to, from, next) => {
       next('/home');
     } else {
       //访问非登录页
-      if (name) {
+      if (username) {
         //有用户信息
         next();
       } else {
@@ -129,6 +126,13 @@ router.beforeEach(async(to, from, next) => {
     //未登录
     //console.log('未登录');
     next();
+  }
+  if (to.path == '/blogedit' || to.path == '/blogpub') {
+    if (token && username && isAdmin) {
+      next();
+    } else {
+      next('/about');
+    }
   }
 });
 

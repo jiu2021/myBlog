@@ -1,5 +1,5 @@
 <template>
-  <div class="blogs" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
+  <div class="blogs" @mouseover="mouseReverse()" @mouseleave="mouseRecover()">
     <div class="blog-content">
       <div class="blog-title">
         <div class="title-content" ref="titleContent">{{blog.title}}</div>
@@ -80,9 +80,6 @@ export default {
         },
         mouseRecover() {
             this.$bus.$emit("mouseRecover");
-        },
-        showMask() {
-            this.$bus.$emit("showMask");
         }
     }
 }

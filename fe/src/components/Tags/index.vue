@@ -1,5 +1,5 @@
 <template>
-  <div class="tags" @mouseover="mouseReverse()" @mouseleave="mouseRecover()" @click="showMask()">
+  <div class="tags" @mouseover="mouseReverse()" @mouseleave="mouseRecover()">
     {{name}}
     <span class="num">{{num}}</span>
   </div>
@@ -15,9 +15,6 @@ export default {
    },
    mouseRecover() {
      this.$bus.$emit('mouseRecover');
-   },
-  showMask(){
-     this.$bus.$emit('showMask');
    }
   }
 }

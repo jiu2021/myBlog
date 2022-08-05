@@ -52,6 +52,9 @@ export default {
       }
     }
   }, 
+  mounted() {
+    this.scrollTop();
+  },
   methods: {
     edit() {
       // 深拷贝，防止引用传参产生问题（奇怪，为什么模板数据改变会修改vuex）
@@ -80,7 +83,10 @@ export default {
           tipInfo:'是否确认删除这篇文章',
           cancelBtn:true,
           async confirm() {
-            await that.$store.dispatch('deleteBlog', id);
+            const res = await that.$store.dispatch('deleteBlog', id);
+            if (res) {
+              that.$tip({ tipInfo: '删除博客成功' });
+            }
           },
           cancel() {
             console.log('取消');
@@ -90,6 +96,13 @@ export default {
       else {
         this.$tip({tipInfo:'对不起，您不是管理员'});
       }
+    },
+      scrollTop() {
+      // 定位到顶部
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   },
   watch: {

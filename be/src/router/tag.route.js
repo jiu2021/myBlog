@@ -2,7 +2,7 @@ const Router = require('koa-router');
 
 const { findAll, findByTag } = require('../controller/tag.controller');
 
-const router = new Router({ prefix: '/tags' });
+const router = new Router({ prefix: '/api/tags' });
 
 // 获取标签列表接口
 router.get('/', findAll);

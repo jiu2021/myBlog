@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const { auth, hadAdminPermission, validator } = require('../middleware/auth.middleware');
 const { findAll, upload, update, remove, visit, findByKey } = require('../controller/blog.controller');
 
-const router = new Router({ prefix: '/blogs' });
+const router = new Router({ prefix: '/api/blogs' });
 
 // 添加博客接口
 router.post('/upload', auth, hadAdminPermission, validator({

@@ -137,7 +137,6 @@ export default {
     height:300px;
     background-color:#353536;
     color: #00dffc;
-    border: 1px solid #00dffc;
     padding: 1rem 0;
   }
 

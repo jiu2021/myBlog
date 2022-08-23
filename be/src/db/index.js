@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 // 生产环境
 /*const user = `${process.env.USER}`;
 const pwd = `${process.env.PWD}`;
-mongoose.connect(`mongodb://${user}:${pwd}@124.220.203.249:27017/BLOG`);*/
+const ip = `${process.env.ip}`
+mongoose.connect(`mongodb://${user}:${pwd}@${ip}:27017/BLOG`);*/
 
 //开发环境
 mongoose.connect('mongodb://localhost:27017/BLOG');

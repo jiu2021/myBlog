@@ -61,9 +61,11 @@ export default {
       const key = this.searchKey;
       if (key.trim() == '') {
         this.$tip({tipInfo:'输入不能为空！'});
+      } else if (key.trim().length > 10) {
+        this.$tip({tipInfo:'请输入合适的关键字！'});
       } else {
-        this.$router.push({ path: `/search/${key}` });
-      }
+        this.$router.push({ path: `/search/${key.trim()}` });
+      };
     },
     showNav() {
       const nav = this.$refs.nav;

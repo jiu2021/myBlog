@@ -7,7 +7,8 @@ import axios from "axios"
 const request = axios.create({
   //配置对象
   //基础路径，发请求时自动在路径中添加
-  baseURL: "/api",
+  baseURL: "/", //开发环境
+  //baseURL: "/api", //生产环境
   //超时5s
   timeout: 5000,
 })

@@ -79,7 +79,6 @@ export default {
     height:200px ;
     background-color:#353536;
     color: #00dffc;
-    border: 1px solid #00dffc;
     justify-content: center;
     padding: 1rem 0;
   }

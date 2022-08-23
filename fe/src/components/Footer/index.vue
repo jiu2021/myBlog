@@ -3,9 +3,9 @@
     <a href="https://github.com/jiu2021" class="link">
       <img src="@/assets/svg/github.svg" /> 本博客GitHub地址
     </a>
-    <a href="#" class="link">鄂ICP备xxxxxxx号-1</a>
+    <a href="https://beian.miit.gov.cn" class="link">皖ICP备2022011914号-1</a>
     <a href="#" class="link">
-      <img src="@/assets/images/gongan.png" /> 鄂公网安备 xxxxxxxxx号
+      <img src="@/assets/images/gongan.png" /> 皖公网安备 xxxxxxxxx号
     </a>
     <div>请使用 Edge 或 Chrome 访问以获得最佳体验</div>
   </div>
@@ -13,12 +13,7 @@
 
 <script>
 export default {
-  name:"Footer",
-  data() {
-    return {
-      searchKey:'',
-    }
-  }
+  name:"Footer"
 }
 </script>
 

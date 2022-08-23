@@ -71,50 +71,60 @@ export default {
 
   .md-wrapper /deep/ .content-input-wrapper {
     border-radius: 0;
-    height: 100vh;
+  }
+  .md-wrapper /deep/ .v-note-edit {
+    background-color: rgb(255, 255, 255);
   }
   /*标题样式*/
-  .md-wrapper /deep/ h1,
-  .md-wrapper /deep/ h2,
-  .md-wrapper /deep/ h3,
-  .md-wrapper /deep/ h4,
-  .md-wrapper /deep/ h5,
-  .md-wrapper /deep/ h6
+  .markdown-body /deep/ h1,
+  .markdown-body /deep/ h2,
+  .markdown-body /deep/ h3,
+  .markdown-body /deep/ h4,
+  .markdown-body /deep/ h5,
+  .markdown-body /deep/ h6
   {
     border: 0;
   }
-  .md-wrapper /deep/ h1::before {
+  .markdown-body /deep/ h1::before {
     content:"";
     border-left: 5px solid #00dffc;
     margin-right: .5rem;
   }
-  .md-wrapper /deep/ h2::before {
+  .markdown-body /deep/ h2::before {
     content:"";
     border-left: 4px solid #08ffea;
     margin-right: .5rem;
   }
-  .md-wrapper /deep/ h3::before {
+  .markdown-body /deep/ h3::before {
     content:"";
     border-left: 3px solid #08ff6f;
     margin-right: .5rem;
   }
-  .md-wrapper /deep/ h4::before {
+  .markdown-body /deep/ h4::before {
     content:"";
     border-left: 2px solid #e7e7e7;
     margin-right: .5rem;
   }
   /*列表样式*/
-  .md-wrapper /deep/ ul {
+  .markdown-body /deep/ ul {
     list-style: disc;
   }
-  .md-wrapper /deep/ ol {
+  .markdown-body /deep/ ol {
     list-style: decimal;
   }
-  /*代码块演示*/
-  .md-wrapper /deep/ pre code{
+  /*代码块样式*/
+  .markdown-body /deep/ pre code{
     font-size: 1rem;
   }
-  .md-wrapper /deep/ pre .hljs {
+  .markdown-body /deep/ pre .hljs {
     background-color: #f6f8fa;
+  }
+  /*粗体样式*/
+  .markdown-body /deep/ strong {
+    color: #daa5eb;
+  }
+  /*链接样式*/
+  .markdown-body /deep/ a {
+    color: var(--primary);
   }
 </style>

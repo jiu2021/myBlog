@@ -5,8 +5,8 @@
         {{tipInfo}}
       </div>
       <div class="box-btn">
-        <Buttons content ='确定' @click.native="confirm()"/>
-        <Buttons content='取消' @click.native="cancel()" v-show="cancelBtn"/>
+        <Buttons content ='确定' @click.native="confirm()" />
+        <Buttons content='取消' @click.native="cancel()" v-show="cancelBtn" />
       </div>
     </div>
   </div>
@@ -78,4 +78,5 @@ export default {
     display: flex;
     justify-content: space-around;
   }
+  
 </style>

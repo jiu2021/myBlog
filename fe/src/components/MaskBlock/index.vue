@@ -6,12 +6,23 @@
 
 <script>
 export default {
-  name:"MaskBlock",
+  name: "MaskBlock",
+  data() {
+    return {
+      timer1: null,
+      timer2: null,
+      timer3: null,
+    }
+  },
   mounted() {
     this.$bus.$on('showMask',(e)=>this.showMask(e));
   },
   methods:{
     showMask(e) {
+      this.timer1 && clearTimeout(this.timer1);
+      this.timer2 && clearTimeout(this.timer2);
+      this.timer3 && clearTimeout(this.timer3);
+
       const maskBlocks = this.$refs.eachMaskBlock
       const mask = this.$refs.maskWrapper;
       for (let i = 0; i < maskBlocks.length; i++) {
@@ -20,23 +31,23 @@ export default {
         maskBlocks[i].style.display = 'block';
       }
       mask.style.display = 'block';
-  
-      setTimeout(() => {
+
+      // -5-95的随机序列
+      let arr = this.getRandNumArr();
+      this.timer1 = setTimeout(() => {
         for (let i = 0; i < maskBlocks.length; i++) {
-          let topValue = Math.round(Math.random() * 100 - 5);
-          let leftValue = Math.round(Math.random() * 100 - 5);
-          maskBlocks[i].style.top = topValue + '%';
-          maskBlocks[i].style.left = leftValue + '%';
+          i < 100 ? maskBlocks[i].style.top = arr[i] + '%' : maskBlocks[i].style.top = arr[Math.floor(Math.random() * 100)] + '%';
+          i < 100 ? maskBlocks[i].style.left = arr[99 - i] + '%' : maskBlocks[i].style.left = arr[Math.floor(Math.random() * 100)] + '%';
           let degValue = Math.round(Math.random() * 360);
           maskBlocks[i].style.setProperty("--rotate-deg", degValue + 'deg');
         }
       }, 0);
 
-      setTimeout(() => {
+      this.timer2 = setTimeout(() => {
         for (let i = 0; i < maskBlocks.length; i++) {
           maskBlocks[i].style.top = -1000 + 'px';
         }
-        setTimeout(() => {
+        this.timer3 = setTimeout(() => {
           for (let i = 0; i < maskBlocks.length; i++) {
             maskBlocks[i].style.display = 'none';
           }
@@ -48,6 +59,12 @@ export default {
     getMousePos(event) {
       let e = event || window.event;
       return { "x": e.clientX, "y": e.clientY };
+    },
+    getRandNumArr() {
+      let arr = Array.from({ length: 100 }, (v, k) => k - 5);
+      return arr.sort(function () {
+        return Math.random() - 0.5;
+      });
     }
   }
 }

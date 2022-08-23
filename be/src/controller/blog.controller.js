@@ -1,5 +1,3 @@
-const { context } = require("../app");
-const app = require("../app");
 const {
   getBlogsListError,
   addBlogError,

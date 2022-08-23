@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-
 const { userFormatError, userAlreadyExisted, userRegisterError, userDoesNotExist, passwordError, userLoginError } = require('../constant/err.type');
 const { getUserInfo } = require('../service/user.service');
 //注册校验

@@ -1,5 +1,5 @@
 <template>
-  <div class="blogedit-wrapper">
+  <div class="blogedit-wrapper" v-title data-title="编辑博客 | jiu。’Blog">
     <Header/>
     <div class="form-wrapper">
       <div class="blog-form">
@@ -26,16 +26,19 @@
       <Buttons content="返回" @click.native="goBack()"/>
       <Buttons content="确认" @click.native="submit()"/>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Markdown from "@/components/Markdown";
+import Footer from "../Footer/index.vue";
 export default {
   name:"BlogEdit",
   components:{
     Markdown,
-  },
+    Footer
+},
   data() {
     return {
       blogInfo: {

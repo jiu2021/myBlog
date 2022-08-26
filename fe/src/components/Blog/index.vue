@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper">
+  <div class="list-wrapper" v-title data-title="文章列表 | jiu。’Blog">
     <div id="top-title">文章列表</div>
     <ul>
       <li v-for="(blog,index) in blogList" :key="index">

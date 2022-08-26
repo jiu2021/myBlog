@@ -11,7 +11,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/': {
-        target: 'http://localhost:8000/api',
+        target: 'http://jiu99.online:8889/api',
       }
     }
   }

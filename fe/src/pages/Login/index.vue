@@ -1,5 +1,5 @@
 <template>
-  <div id="login-wrapper">
+  <div id="login-wrapper" v-title data-title="登录">
     <form id="login-box">
       <div id="account">
         <div class="input-box">

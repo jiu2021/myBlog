@@ -36,3 +36,10 @@ new Vue({
   store,
   mavonEditor
 }).$mount('#app')
+
+// 动态修改页签标题
+Vue.directive('title', {
+  inserted: function(el, binding) {
+    document.title = el.dataset.title;
+  }
+})

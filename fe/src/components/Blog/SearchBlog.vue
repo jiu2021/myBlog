@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper" ref="pageTop">
+  <div class="list-wrapper" ref="pageTop" v-title data-title="搜索文章 | jiu。’Blog">
     <div id="top-title" v-if="curPage.pageName === 'key'">关键字“{{curPage.search}}”检索结果：</div>
     <div id="top-title" v-else>标签“{{curPage.tagName}}”检索结果：</div>
     <ul>

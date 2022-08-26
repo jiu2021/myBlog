@@ -1,5 +1,5 @@
 <template>
-  <div id="home-wrapper">
+  <div id="home-wrapper" v-title data-title="文章列表 | jiu。’Blog">
     <Header />
     <div id="main">
       <div id="menu-container">

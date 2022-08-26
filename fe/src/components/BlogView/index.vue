@@ -1,5 +1,5 @@
 <template>
-  <div class="blogview-wrapper">
+  <div class="blogview-wrapper" v-title :data-title="blogInfo.title + ' | jiu。’Blog'">
     <div class="blogview-header">
       <div class="blog-title">
         <div class="title-content" ref="titleContent">{{blogInfo.title}}</div>

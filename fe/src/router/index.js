@@ -113,7 +113,8 @@ router.beforeEach(async(to, from, next) => {
       } else {
         //获取用户信息
         try {
-          await store.dispatch('getUserInfo');
+          const res = await store.dispatch('getUserInfo');
+          console.log(res);
           next();
         } catch (error) {
           //token失效

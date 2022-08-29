@@ -18,6 +18,11 @@
       </div>
     </div>
     <Markdown :config="config" :blogInfo="blogInfo" />
+    <div class="tip">
+      <span>
+        认为作者写的不错的话，欢迎去其他主页上点赞收藏，也欢迎在github上给该博客项目star哦！
+      </span>
+    </div>
     <div class="blogview-footer" v-if="isAdmin">
       <Buttons content = '编辑' @click.native="edit()"/>
       <Buttons content = '删除' @click.native="remove()"/>
@@ -201,5 +206,16 @@ export default {
 
 .back-top img {
   width: 2rem;
+}
+
+.tip {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: #606060;
+  margin: 1rem 0;
+}
+.tip > span {
+  text-align: center;
 }
 </style>

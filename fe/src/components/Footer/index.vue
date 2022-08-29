@@ -1,8 +1,17 @@
 <template>
   <div id="footer">
-    <a href="https://github.com/jiu2021" target="_blank" class="link">
-      <img src="@/assets/svg/github.svg" /> 本博客GitHub地址
-    </a>
+    <div class="other-page">
+      其他主页：
+      <a href="https://blog.csdn.net/kj_2020" target="_blank" class="link">
+        <img src="@/assets/svg/csdn.svg" alt="CSDN" />CSDN
+      </a>|
+      <a href="https://github.com/jiu2021" target="_blank" class="link">
+        <img src="@/assets/svg/github.svg" alt="github" />github
+      </a>|
+      <a href="https://juejin.cn/user/308341407511406" target="_blank" class="link">
+        <img src="@/assets/svg/juejin.svg" alt="juejin" />
+      </a>
+    </div>
     <a href="https://beian.miit.gov.cn" target="_blank" class="link">皖ICP备2022011914号-1</a>
     <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42011102004964" class="link">
       <img src="@/assets/images/gongan.png" /> 鄂公网安备 42011102004964号
@@ -29,31 +38,32 @@ export default {
   padding-bottom: 4rem;
   padding-top: 4rem;
 }
-
+.other-page {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.other-page a {
+  display: flex;
+  justify-content: center;
+  padding: 0 .5rem;
+}
 #footer a {
   text-decoration: none;
   color: #b1b1b1;
 }
-
+#footer a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
 #footer > .link:hover {
   text-decoration: underline;
   color: var(--primary);
 }
 
-#footer a:nth-child(2) {
-  margin-top: 0.8rem;
-  color: rgb(177, 177, 177);
-}
-
-#footer a:nth-child(3) {
-  margin-bottom: 0.8rem;
-  color: rgb(177, 177, 177);
-}
-
 #footer a img {
-  width: 14px;
+  height: 1rem;
 }
-
 
 /*页脚样式*/
 </style>

@@ -18,9 +18,15 @@
       </div>
     </div>
     <Markdown :config="config" :blogInfo="blogInfo" />
-    <div class="blogview-footer">
+    <div class="blogview-footer" v-if="isAdmin">
       <Buttons content = '编辑' @click.native="edit()"/>
       <Buttons content = '删除' @click.native="remove()"/>
+    </div>
+    <div class="blogview-footer" v-else>
+      <div class="back-top" @click="scrollTop()">
+        <img src="@/assets/svg/backTop.svg" alt="返回顶部">
+      </div>
+      <Buttons content = '返回' @click.native="goBack()"/>
     </div>
   </div>
 </template>
@@ -28,12 +34,14 @@
 <script>
 import Markdown from "@/components/Markdown";
 import Tags from "@/components/Tags";
+import Buttons from "../Buttons/index.vue";
 export default {
   name:"BlogView",
   components:{
     Markdown,
     Tags,
-  },
+    Buttons
+},
   data() {
     return {
       index:0,
@@ -98,13 +106,21 @@ export default {
         this.$tip({tipInfo:'对不起，您不是管理员'});
       }
     },
-      scrollTop() {
+    goBack() {
+      this.$router.go(-1);
+    },
+    scrollTop() {
       // 定位到顶部
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
-    }
+    },
+  },
+  computed:{
+    isAdmin() {
+        return this.$store.state.user.userInfo.isAdmin;
+    },
   },
   watch: {
     "$store.state.blog.blogInfo": {
@@ -175,5 +191,15 @@ export default {
 .tag {
   display: inline-block;
   margin-right: .2rem;
+}
+.back-top {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: .1rem .5rem;
+}
+
+.back-top img {
+  width: 2rem;
 }
 </style>

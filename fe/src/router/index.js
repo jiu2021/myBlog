@@ -114,8 +114,13 @@ router.beforeEach(async(to, from, next) => {
         //获取用户信息
         try {
           const res = await store.dispatch('getUserInfo');
-          console.log(res);
-          next();
+          if (!res) {
+            //token失效
+            await store.dispatch('userLogout');
+            next('/login');
+          } else {
+            next();
+          }
         } catch (error) {
           //token失效
           await store.dispatch('userLogout');

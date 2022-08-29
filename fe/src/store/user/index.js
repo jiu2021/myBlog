@@ -54,8 +54,9 @@ const actions = {
     let result = await reqUserInfo();
     if (result.code == 200) {
       context.commit('GETUSERINFO', result.data);
+      return Promise.resolve(true);
     } else {
-      return Promise.reject(new Error(result.message));
+      return Promise.resolve(false);
     }
   },
   //退出登录

@@ -1,5 +1,5 @@
 <template>
-  <div id="about-wrapper" v-title data-title="关于本站">
+  <div id="about-wrapper" v-title data-title="关于本站  | jiu。’Blog">
     <transition name="slide-fade">
       <div id="aboutME">
         <div id="headPortrait">

@@ -1,11 +1,11 @@
 <template>
   <div id="footer">
-    <a href="https://github.com/jiu2021" class="link">
+    <a href="https://github.com/jiu2021" target="_blank" class="link">
       <img src="@/assets/svg/github.svg" /> 本博客GitHub地址
     </a>
-    <a href="https://beian.miit.gov.cn" class="link">皖ICP备2022011914号-1</a>
-    <a href="#" class="link">
-      <img src="@/assets/images/gongan.png" /> 皖公网安备 xxxxxxxxx号
+    <a href="https://beian.miit.gov.cn" target="_blank" class="link">皖ICP备2022011914号-1</a>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42011102004964" class="link">
+      <img src="@/assets/images/gongan.png" /> 鄂公网安备 42011102004964号
     </a>
     <div>请使用 Edge 或 Chrome 访问以获得最佳体验</div>
   </div>
@@ -35,8 +35,9 @@ export default {
   color: #b1b1b1;
 }
 
-.link:hover {
-  text-decoration: underline!important;
+#footer > .link:hover {
+  text-decoration: underline;
+  color: var(--primary);
 }
 
 #footer a:nth-child(2) {

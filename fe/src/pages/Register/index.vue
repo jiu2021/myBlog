@@ -1,5 +1,5 @@
 <template>
-  <div id="register-wrapper" v-title data-title="注册">
+  <div id="register-wrapper" v-title data-title="注册 | jiu。’Blog">
     <form id="register-box">
       <div id="username" class="input-box">
         <span>昵称：</span>

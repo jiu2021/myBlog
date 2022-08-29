@@ -112,7 +112,7 @@ export default {
       }
       console.log(this.$route);
     },
-    async goBack() {
+    goBack() {
       this.$router.go(-1);
     },
     // 给markdown绑定自定义事件，获取实时编辑值

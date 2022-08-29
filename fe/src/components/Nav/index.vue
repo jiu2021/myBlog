@@ -3,7 +3,7 @@
     <Buttons content = '关于我' @click.native="goPage('关于我')"/>
     <Buttons content = '文章' @click.native="goPage('文章')"/>
     <Buttons content = '简历' @click.native="goPage('简历')"/>
-    <Buttons content = '发布文章' v-show="isShowPub" @click.native="goPub()"/>
+    <Buttons content = '发布文章' v-if="isAdmin" @click.native="goPub()"/>
   </div>
 </template>
 
@@ -11,11 +11,6 @@
 import { switchPage } from '@/utils';
 export default {
   name: "Nav",
-  data() {
-    return {
-      isShowPub:false
-    }
-  },
   methods: {
     goPub() {
       this.$router.push('blogpub');
@@ -24,18 +19,10 @@ export default {
       switchPage(this, page);
     }
   },
-  watch: {
-    "$store.state.user.userInfo": {
-      immediate:true,
-      deep: true,
-      handler(newValue) {
-        if (newValue && newValue.isAdmin) {
-          this.isShowPub = true;
-        } else {
-          this.isShowPub = false;
-        }
-      }
-    }
+  computed:{
+    isAdmin() {
+        return this.$store.state.user.userInfo.isAdmin;
+    },
   }
 }
 </script>

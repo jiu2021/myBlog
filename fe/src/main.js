@@ -24,6 +24,13 @@ import TipBox from '@/components/TipBox/index'
 Vue.prototype.$tip = TipBox;
 //注册编辑器
 Vue.use(mavonEditor)
+  // 自定义指令，动态修改页签标题
+Vue.directive('title', {
+  inserted: function(el, binding) {
+    document.title = el.dataset.title;
+  }
+})
+
 new Vue({
   //装载事件总线
   beforeCreate() {
@@ -36,10 +43,3 @@ new Vue({
   store,
   mavonEditor
 }).$mount('#app')
-
-// 动态修改页签标题
-Vue.directive('title', {
-  inserted: function(el, binding) {
-    document.title = el.dataset.title;
-  }
-})

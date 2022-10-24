@@ -17,6 +17,7 @@
         </div>
       </div>
     </transition>
+    <Footer />
   </div>
 </template>
 

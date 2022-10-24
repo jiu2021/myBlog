@@ -8,11 +8,11 @@ module.exports = {
   //关闭eslint
   lintOnSave: false,
   //代理跨域
-  devServer: {
+  /*devServer: {
     proxy: {
       '/': {
         target: 'http://jiu99.online:8889/api',
       }
     }
-  }
+  }*/
 }

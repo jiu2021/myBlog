@@ -2,6 +2,7 @@
   <div id="home-wrapper" v-title data-title="文章列表 | jiu。’Blog">
     <Header />
     <div id="main">
+      <h1 class="toBeSearched">jiu。’Blog的首页 | 文章列表</h1>
       <div id="menu-container">
         <Nav/>
       </div>
@@ -43,7 +44,9 @@ export default {
 
 <style scoped>
 /*主体样式*/
-
+.toBeSearched {
+  display: none;
+}
 #home-wrapper {
   width: 100vw;
   min-height: 100vh;

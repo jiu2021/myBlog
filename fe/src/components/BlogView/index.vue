@@ -2,6 +2,7 @@
   <div class="blogview-wrapper" v-title :data-title="blogInfo.title + ' | jiu。’Blog'">
     <div class="blogview-header">
       <div class="blog-title">
+        <h1 class="toBeSearched">{{blogInfo.title}}</h1>
         <div class="title-content" ref="titleContent">{{blogInfo.title}}</div>
         <div class="view-nums">
           <img src="@/assets/svg/hot.svg" class="view" />
@@ -140,6 +141,10 @@ export default {
 </script>
 
 <style scoped>
+.toBeSearched {
+  display: none;
+}
+
 .blogview-header {
   padding: 1rem 0 .5rem 0;
 }

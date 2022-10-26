@@ -39,7 +39,6 @@ td {
 
 body {
   width: 100vw;
-  /*min-width: 100vh;*/
   height: 100vh;
   background-color: var(--bg);
 }

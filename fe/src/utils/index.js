@@ -9,10 +9,16 @@ export const switchPage = (that, page) => {
       router = '/about'
       break;
     case '简历':
-      that.$tip({ tipInfo: '制作中！' });
+      goResume();
+      //that.$tip({ tipInfo: '制作中！' });
       break;
   }
   if (router) {
     that.$router.push(router);
   }
+}
+
+function goResume() {
+  const url = 'http://resume.jiu99.online/';
+  window.open(url);
 }
